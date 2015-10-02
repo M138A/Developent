@@ -25,4 +25,4 @@ nbactions.xml
 nb-configuration.xml
 .nb-gradle/
 
-persistence.xml
+DEV FX/src/META-INF/persistence.xml
