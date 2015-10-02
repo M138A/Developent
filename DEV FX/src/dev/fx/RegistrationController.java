@@ -53,6 +53,7 @@ public class RegistrationController implements Initializable {
     }
     private void register()
     {
+        
         /*Characters newCharacter = new Characters();
         newCharacter.setName(username.getText());
         newCharacter.persist(newCharacter);*/
