@@ -53,9 +53,9 @@ public class RegistrationController implements Initializable {
     }
     private void register()
     {
-        Characters newCharacter = new Characters();
+        /*Characters newCharacter = new Characters();
         newCharacter.setName(username.getText());
-        newCharacter.persist(newCharacter);
+        newCharacter.persist(newCharacter);*/
         Users newUser = new Users();
         newUser.setFirstName(name.getText());
         newUser.setLastName(surname.getText());

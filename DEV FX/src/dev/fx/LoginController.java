@@ -64,7 +64,7 @@ public class LoginController implements Initializable {
         usernameField.setDisable(true);
         passwordField.setDisable(true);
         regButton.setDisable(true);
-        button.setDisable(true);
+        button.setDisable(true);    
         
         
     }
