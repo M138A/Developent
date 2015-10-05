@@ -81,7 +81,7 @@ public class LoginController implements Initializable {
     }
     private void moveToMainScreen(Users loggingInUser)
     {
-        fxmlController controller = new fxmlController();
+        fxmlController controller = new fxmlController(loggingInUser);
         controller.setMainStage("Main", "mainScreen.fxml", 600,600);
         
     }
