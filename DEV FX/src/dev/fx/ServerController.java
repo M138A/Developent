@@ -36,15 +36,21 @@ public class ServerController implements Initializable {
     private String serverName;
     private Collection<Users> UsersCollection;
 
+       @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        getServers();
+    }
+    
     public void getServers()
     {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("DEV_FXPU");
         EntityManager em = emf.createEntityManager();        
-        List results = em.createNamedQuery("Servers.findAll")
+        List results = em.createNamedQuery("Servers.findByName")
+                .setParameter("name", "UK")
                 .getResultList();
-        if(results.size() != 0)
+        if(!results.isEmpty())
         {
-           for (int i=0;i < results.size();i++)
+           for (int i=0 ;i < results.size(); i++)
            {
                 
                 Servers s = new Servers();
@@ -63,6 +69,7 @@ public class ServerController implements Initializable {
         else
         {
             setServers();
+            serverCountLabel.setText("Aantal Servers beschikbaar: " + serverCount);
         }
            
         
@@ -81,13 +88,7 @@ public class ServerController implements Initializable {
     
     public void setServers()
     {
-        serverCountLabel.setText("Aantal Servers beschikbaar: " + serverCount);
+        
     }
-    
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
+      
 }
