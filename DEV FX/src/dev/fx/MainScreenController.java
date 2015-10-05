@@ -23,16 +23,19 @@ public class MainScreenController implements Initializable {
     
     public void setUser(Users user) {
         this.user = user;
-        System.out.println(this.user.getUserName());
-        
+        setGUI();
     }
-    
+    private void setGUI()
+    {
+        usernameLabel.setText("Welcome " + user.getUserName());
+    }
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
     }    
     
 }
