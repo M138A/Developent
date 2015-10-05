@@ -6,9 +6,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="dev.fx.MainScreenController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.fx.MainScreenController">
   <children>
     <Button layoutX="231.0" layoutY="114.0" mnemonicParsing="false" text="Button" />
     <Label fx:id="usernameLabel" layoutX="181.0" layoutY="40.0" text="Label" />
+    <Button fx:id="serverButton" layoutX="471.0" layoutY="295.0" mnemonicParsing="false" onAction="#toServers" text="Servers" />
   </children>
 </AnchorPane>
