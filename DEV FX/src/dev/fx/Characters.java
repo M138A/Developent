@@ -6,14 +6,22 @@
 package dev.fx;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Persistence;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -29,6 +37,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Characters.findByLevel", query = "SELECT c FROM Characters c WHERE c.level = :level"),
     @NamedQuery(name = "Characters.findByRace", query = "SELECT c FROM Characters c WHERE c.race = :race")})
 public class Characters implements Serializable {
+    @JoinTable(name = "owns", joinColumns = {
+        @JoinColumn(name = "name", referencedColumnName = "name")}, inverseJoinColumns = {
+        @JoinColumn(name = "user_name", referencedColumnName = "user_name")})
+    @ManyToMany
+    private Collection<Users> usersCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -104,5 +117,30 @@ public class Characters implements Serializable {
     public String toString() {
         return "dev.fx.Characters[ name=" + name + " ]";
     }
+
+    public void persist(Object object) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DEV_FXPU");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        try {
+            em.persist(object);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+    }
+
+    @XmlTransient
+    public Collection<Users> getUsersCollection() {
+        return usersCollection;
+    }
+
+    public void setUsersCollection(Collection<Users> usersCollection) {
+        this.usersCollection = usersCollection;
+    }
+    
     
 }
