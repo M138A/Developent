@@ -9,7 +9,13 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="dev.fx.MainScreenController">
   <children>
     <Button fx:id="serverButton" layoutX="495.0" layoutY="352.0" mnemonicParsing="false" onAction="#goToServer" text="Servers" />
-    <Label fx:id="usernameLabel" layoutX="181.0" layoutY="40.0" text="Label" />
-    <Button layoutX="495.0" layoutY="290.0" mnemonicParsing="false" text="Characters" onAction="#goToCharacters" />
+    <Label id="usernameLabel" fx:id="balanceLabel" layoutX="24.0" layoutY="14.0" prefWidth="41.0" text="" />
+    <Button layoutX="495.0" layoutY="290.0" mnemonicParsing="false" onAction="#goToCharacters" text="Characters" />
+    <Label fx:id="paymentLabel" layoutX="418.0" layoutY="34.0" text="Payment information" />
+    <TextField fx:id="ibanField" layoutX="391.0" layoutY="71.0" prefWidth="200.0" promptText="IBAN" />
+    <Button fx:id="ibanSubmitButton" layoutX="450.0" layoutY="120.0" mnemonicParsing="false" onAction="#insertIBAN" text="Save IBAN" />
+    <Label layoutX="14.0" layoutY="42.0" text="Add money to account" />
+    <TextField fx:id="amountField" layoutX="24.0" layoutY="71.0" prefWidth="75.0" promptText="amount" />
+    <Button fx:id="amoutSubmitField" layoutX="19.0" layoutY="110.0" mnemonicParsing="false" text="Add money" onAction="#addMoney" />
   </children>
 </AnchorPane>
