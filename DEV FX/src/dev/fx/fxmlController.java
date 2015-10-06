@@ -45,27 +45,23 @@ public class fxmlController extends DEVFX {
             controller.setUser(u);
             theStage.close();
             stage.show();
-            
 
-            /*
-             try {
-             FXMLLoader x = FXMLLoader.load(getClass().getResource(fxmlURL));
-             root = FXMLLoader.load(MainScreenController.class.getResource(fxmlURL));
-             //root = x.load();
-             MainScreenController controller = (MainScreenController) x.getController();
-             theStage.setScene(new Scene(root, size1, size2));
-             theStage.setTitle(Title);
-             try {
-             theStage.show();
-            
-             } catch (Exception ex) {
-             Logger.getLogger(fxmlController.class.getName()).log(Level.SEVERE, null, ex);
-             }
-             } catch (IOException e) {
-             e.printStackTrace();
-             }*/
         } catch (IOException ex) {
             Logger.getLogger(fxmlController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void goToRegistrationForm(String fxmlURL, String Title) {
+        try {
+
+            root = FXMLLoader.load(getClass().getResource(fxmlURL));
+            theStage.setTitle(Title);
+            theStage.setScene(new Scene(root, 200,200));
+            theStage.centerOnScreen();
+            theStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -6,24 +6,14 @@
 package dev.fx;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.Persistence;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -36,8 +26,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Characters.findAll", query = "SELECT c FROM Characters c"),
     @NamedQuery(name = "Characters.findByName", query = "SELECT c FROM Characters c WHERE c.name = :name"),
     @NamedQuery(name = "Characters.findByClass1", query = "SELECT c FROM Characters c WHERE c.class1 = :class1"),
-    @NamedQuery(name = "Characters.findByRace", query = "SELECT c FROM Characters c WHERE c.race = :race"),
-    @NamedQuery(name = "Characters.findByLevel", query = "SELECT c FROM Characters c WHERE c.level = :level")})
+    @NamedQuery(name = "Characters.findByLevel", query = "SELECT c FROM Characters c WHERE c.level = :level"),
+    @NamedQuery(name = "Characters.findByRace", query = "SELECT c FROM Characters c WHERE c.race = :race")})
 public class Characters implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,17 +36,10 @@ public class Characters implements Serializable {
     private String name;
     @Column(name = "class")
     private String class1;
-    @Column(name = "race")
-    private String race;
     @Column(name = "level")
     private Integer level;
-    @JoinTable(name = "owns", joinColumns = {
-        @JoinColumn(name = "name", referencedColumnName = "name")}, inverseJoinColumns = {
-        @JoinColumn(name = "name", referencedColumnName = "user_name")})
-    @ManyToMany
-    private Collection<Users> usersCollection;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "characters")
-    private Users users;
+    @Column(name = "race")
+    private String race;
 
     public Characters() {
     }
@@ -81,14 +64,6 @@ public class Characters implements Serializable {
         this.class1 = class1;
     }
 
-    public String getRace() {
-        return race;
-    }
-
-    public void setRace(String race) {
-        this.race = race;
-    }
-
     public Integer getLevel() {
         return level;
     }
@@ -97,21 +72,12 @@ public class Characters implements Serializable {
         this.level = level;
     }
 
-    @XmlTransient
-    public Collection<Users> getUsersCollection() {
-        return usersCollection;
+    public String getRace() {
+        return race;
     }
 
-    public void setUsersCollection(Collection<Users> usersCollection) {
-        this.usersCollection = usersCollection;
-    }
-
-    public Users getUsers() {
-        return users;
-    }
-
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setRace(String race) {
+        this.race = race;
     }
 
     @Override
@@ -137,21 +103,6 @@ public class Characters implements Serializable {
     @Override
     public String toString() {
         return "dev.fx.Characters[ name=" + name + " ]";
-    }
-
-    public void persist(Object object) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DEV_FXPU");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        try {
-            em.persist(object);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
     }
     
 }

@@ -47,7 +47,8 @@ public class LoginController implements Initializable {
     @FXML
     private void startRegistrationForm(ActionEvent event) {
         fxmlController x = new fxmlController();
-        x.setMainStage("Register", "registration.fxml", 450, 450);
+        x.goToRegistrationForm("registration.fxml", "Register" );
+        
        /* String name = "Mark";
         Characters x = new Characters();
         x.setName(name);
@@ -85,8 +86,6 @@ public class LoginController implements Initializable {
         controller.setMainStage("Main", "mainScreen.fxml", 600,600);
         
     }
-    
-        
     private void processLogin(String user, String pass)
     {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("DEV_FXPU");
@@ -94,7 +93,7 @@ public class LoginController implements Initializable {
         List results = em.createNamedQuery("Users.findByUserName")
                 .setParameter("userName", user)
                 .getResultList();
-        if(!results.isEmpty())
+        if(results.size() != 0)
         {
             loggingUser = (Users) results.get(0);            
             if(String.valueOf(pass).equals(loggingUser.getPassword()))

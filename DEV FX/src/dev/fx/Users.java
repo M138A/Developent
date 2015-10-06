@@ -14,11 +14,9 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Persistence;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -37,14 +35,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
     @NamedQuery(name = "Users.findByUserName", query = "SELECT u FROM Users u WHERE u.userName = :userName"),
     @NamedQuery(name = "Users.findByBalance", query = "SELECT u FROM Users u WHERE u.balance = :balance"),
-    @NamedQuery(name = "Users.findByFirstName", query = "SELECT u FROM Users u WHERE u.firstName = :firstName"),
-    @NamedQuery(name = "Users.findByLastName", query = "SELECT u FROM Users u WHERE u.lastName = :lastName"),
-    @NamedQuery(name = "Users.findByIban", query = "SELECT u FROM Users u WHERE u.iban = :iban"),
+    @NamedQuery(name = "Users.findByBanned", query = "SELECT u FROM Users u WHERE u.banned = :banned"),
     @NamedQuery(name = "Users.findByCharacterSlots", query = "SELECT u FROM Users u WHERE u.characterSlots = :characterSlots"),
+    @NamedQuery(name = "Users.findByFirstName", query = "SELECT u FROM Users u WHERE u.firstName = :firstName"),
+    @NamedQuery(name = "Users.findByIban", query = "SELECT u FROM Users u WHERE u.iban = :iban"),
+    @NamedQuery(name = "Users.findByLastName", query = "SELECT u FROM Users u WHERE u.lastName = :lastName"),
     @NamedQuery(name = "Users.findByLastPayment", query = "SELECT u FROM Users u WHERE u.lastPayment = :lastPayment"),
     @NamedQuery(name = "Users.findByMonthsPayed", query = "SELECT u FROM Users u WHERE u.monthsPayed = :monthsPayed"),
-    @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
-    @NamedQuery(name = "Users.findByBanned", query = "SELECT u FROM Users u WHERE u.banned = :banned")})
+    @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")})
 public class Users implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,14 +51,16 @@ public class Users implements Serializable {
     private String userName;
     @Column(name = "balance")
     private Integer balance;
-    @Column(name = "first_name")
-    private String firstName;
-    @Column(name = "last_name")
-    private String lastName;
-    @Column(name = "iban")
-    private String iban;
+    @Column(name = "banned")
+    private Boolean banned;
     @Column(name = "character_slots")
     private Integer characterSlots;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "iban")
+    private String iban;
+    @Column(name = "last_name")
+    private String lastName;
     @Column(name = "last_payment")
     @Temporal(TemporalType.DATE)
     private Date lastPayment;
@@ -68,15 +68,8 @@ public class Users implements Serializable {
     private Integer monthsPayed;
     @Column(name = "password")
     private String password;
-    @Column(name = "banned")
-    private Boolean banned;
     @ManyToMany(mappedBy = "usersCollection")
     private Collection<Servers> serversCollection;
-    @ManyToMany(mappedBy = "usersCollection")
-    private Collection<Characters> charactersCollection;
-    @JoinColumn(name = "user_name", referencedColumnName = "name", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Characters characters;
 
     public Users() {
     }
@@ -101,20 +94,28 @@ public class Users implements Serializable {
         this.balance = balance;
     }
 
+    public Boolean getBanned() {
+        return banned;
+    }
+
+    public void setBanned(Boolean banned) {
+        this.banned = banned;
+    }
+
+    public Integer getCharacterSlots() {
+        return characterSlots;
+    }
+
+    public void setCharacterSlots(Integer characterSlots) {
+        this.characterSlots = characterSlots;
+    }
+
     public String getFirstName() {
         return firstName;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getIban() {
@@ -125,12 +126,12 @@ public class Users implements Serializable {
         this.iban = iban;
     }
 
-    public Integer getCharacterSlots() {
-        return characterSlots;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setCharacterSlots(Integer characterSlots) {
-        this.characterSlots = characterSlots;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Date getLastPayment() {
@@ -157,14 +158,6 @@ public class Users implements Serializable {
         this.password = password;
     }
 
-    public Boolean getBanned() {
-        return banned;
-    }
-
-    public void setBanned(Boolean banned) {
-        this.banned = banned;
-    }
-
     @XmlTransient
     public Collection<Servers> getServersCollection() {
         return serversCollection;
@@ -172,23 +165,6 @@ public class Users implements Serializable {
 
     public void setServersCollection(Collection<Servers> serversCollection) {
         this.serversCollection = serversCollection;
-    }
-
-    @XmlTransient
-    public Collection<Characters> getCharactersCollection() {
-        return charactersCollection;
-    }
-
-    public void setCharactersCollection(Collection<Characters> charactersCollection) {
-        this.charactersCollection = charactersCollection;
-    }
-
-    public Characters getCharacters() {
-        return characters;
-    }
-
-    public void setCharacters(Characters characters) {
-        this.characters = characters;
     }
 
     @Override

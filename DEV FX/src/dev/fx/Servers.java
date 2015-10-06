@@ -30,24 +30,24 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Servers.findAll", query = "SELECT s FROM Servers s"),
     @NamedQuery(name = "Servers.findByAdress", query = "SELECT s FROM Servers s WHERE s.adress = :adress"),
-    @NamedQuery(name = "Servers.findByName", query = "SELECT s FROM Servers s WHERE s.name = :name"),
+    @NamedQuery(name = "Servers.findByConnectedUsers", query = "SELECT s FROM Servers s WHERE s.connectedUsers = :connectedUsers"),
     @NamedQuery(name = "Servers.findByLocation", query = "SELECT s FROM Servers s WHERE s.location = :location"),
     @NamedQuery(name = "Servers.findByMaxUsers", query = "SELECT s FROM Servers s WHERE s.maxUsers = :maxUsers"),
-    @NamedQuery(name = "Servers.findByConnectedUsers", query = "SELECT s FROM Servers s WHERE s.connectedUsers = :connectedUsers")})
+    @NamedQuery(name = "Servers.findByName", query = "SELECT s FROM Servers s WHERE s.name = :name")})
 public class Servers implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "adress")
     private String adress;
-    @Column(name = "name")
-    private String name;
+    @Column(name = "connected_users")
+    private Integer connectedUsers;
     @Column(name = "location")
     private String location;
     @Column(name = "max_users")
     private Integer maxUsers;
-    @Column(name = "connected_users")
-    private Integer connectedUsers;
+    @Column(name = "name")
+    private String name;
     @JoinTable(name = "stores", joinColumns = {
         @JoinColumn(name = "adress", referencedColumnName = "adress")}, inverseJoinColumns = {
         @JoinColumn(name = "name", referencedColumnName = "user_name")})
@@ -69,12 +69,12 @@ public class Servers implements Serializable {
         this.adress = adress;
     }
 
-    public String getName() {
-        return name;
+    public Integer getConnectedUsers() {
+        return connectedUsers;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setConnectedUsers(Integer connectedUsers) {
+        this.connectedUsers = connectedUsers;
     }
 
     public String getLocation() {
@@ -93,12 +93,12 @@ public class Servers implements Serializable {
         this.maxUsers = maxUsers;
     }
 
-    public Integer getConnectedUsers() {
-        return connectedUsers;
+    public String getName() {
+        return name;
     }
 
-    public void setConnectedUsers(Integer connectedUsers) {
-        this.connectedUsers = connectedUsers;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @XmlTransient

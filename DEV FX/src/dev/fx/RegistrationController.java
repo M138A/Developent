@@ -63,12 +63,12 @@ public class RegistrationController implements Initializable {
         newUser.setUserName(username.getText());
         newUser.setPassword(password.getText());
         newUser.persist(newUser);
-        goToMainScreen();
+        goToMainScreen(newUser);
         
     }
-    private void goToMainScreen()
+    private void goToMainScreen(Users u)
     {
-        fxmlController x = new fxmlController();
+        fxmlController x = new fxmlController(u);
         x.setMainStage("Register", "mainScreen.fxml", 700, 700);
     }
     private boolean checkNonExistingUser()
