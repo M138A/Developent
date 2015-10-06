@@ -44,6 +44,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Users.findByMonthsPayed", query = "SELECT u FROM Users u WHERE u.monthsPayed = :monthsPayed"),
     @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")})
 public class Users implements Serializable {
+    @ManyToMany(mappedBy = "usersCollection")
+    private Collection<Characters> charactersCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -206,6 +208,15 @@ public class Users implements Serializable {
         } finally {
             em.close();
         }
+    }
+
+    @XmlTransient
+    public Collection<Characters> getCharactersCollection() {
+        return charactersCollection;
+    }
+
+    public void setCharactersCollection(Collection<Characters> charactersCollection) {
+        this.charactersCollection = charactersCollection;
     }
     
 }
