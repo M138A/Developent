@@ -23,6 +23,8 @@ public class MainScreenController implements Initializable {
     private Label usernameLabel;
     private Users user = null;
     
+    public static String username;
+    
     public void setUser(Users user) {
         this.user = user;
         setGUI();
@@ -30,6 +32,7 @@ public class MainScreenController implements Initializable {
     private void setGUI()
     {
         usernameLabel.setText("Welcome " + user.getUserName());
+        username = user.getUserName();
     }
      @FXML
     private void goToServer(ActionEvent event) throws IOException
