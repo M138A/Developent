@@ -41,6 +41,7 @@ public class LoginController implements Initializable {
     private Users loggingUser = null;
     private String username = "";
     private String password = "";
+    public static Users loginUser;
     /*
     Login method
     */
@@ -99,6 +100,7 @@ public class LoginController implements Initializable {
             loggingUser = (Users) results.get(0);            
             if(String.valueOf(pass).equals(loggingUser.getPassword()))
             {
+                loginUser = loggingUser;
                 disableAllInput();
                 moveToMainScreen(loggingUser);
             }

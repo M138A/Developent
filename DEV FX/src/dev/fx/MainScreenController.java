@@ -9,15 +9,19 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  * FXML Controller class
@@ -26,29 +30,38 @@ import javax.persistence.Persistence;
  */
 public class MainScreenController implements Initializable {
     
-    @FXML
-    private Label paymentLabel, balanceLabel;
+    //@FXML
+    //private Label paymentLabel, balanceLabel;
     private Users user = null;
+    //@FXML
+    //private Button ibanSubmitButton;
+    //@FXML
+    //TextField ibanField, amountField; */
+    //public static String username;
     @FXML
-    private Button ibanSubmitButton;
-    @FXML
-    TextField ibanField, amountField;
-    public static String username;
+    Label characterNameLabel, characterRaceLabel, characterClassLabel, characterLevelLabel;
+    
+    private String characterName;
+    private String selectedClass;
+    private String race;
+    private int level;
+    private String selectedCharacter;
     EntityManagerFactory emf;
     EntityManager em;
+    
+    
+    
+    @FXML
+    ChoiceBox characterChoiceBox = new ChoiceBox();
 
     public void setUser(Users user) {
-
         this.user = user;
-        setupApplication();
     }
     
     private void setupApplication() {
         emf = Persistence.createEntityManagerFactory("DEV_FXPU");
         em = emf.createEntityManager();
-        username = user.getUserName();
-        setBalanceLabel();
-       
+        //setBalanceLabel();   
     }
 
     @FXML
@@ -62,10 +75,13 @@ public class MainScreenController implements Initializable {
         fxmlController c = new fxmlController();
         c.goToRegistrationForm(event, "characters.fxml", "Characters");
     }
+    
+    /*
     private void setBalanceLabel()
     {
         balanceLabel.setText("Your balance: € " + String.valueOf(user.getBalance()));
     }
+    
     @FXML
     public void insertIBAN(ActionEvent action) {
         em.getTransaction().begin();
@@ -82,6 +98,7 @@ public class MainScreenController implements Initializable {
             em.close();
         }    
     }
+    
     @FXML
     public void addMoney(ActionEvent event)
     {
@@ -100,14 +117,72 @@ public class MainScreenController implements Initializable {
         } finally {
             em.close();
         }  
+    } */
+    
+    
+    public void addCharactersToMenu() {
+        List results = em.createNativeQuery("SELECT name FROM owns WHERE user_name = ?")
+                .setParameter(1, LoginController.loginUser.getUserName())
+                .getResultList();
+        
+        String name = (String) results.get(0);
+        characterChoiceBox.setValue(name);
+        
+        for(int i = 0; i < results.size(); i++) {
+            String result = (String) results.get(i);
+            characterChoiceBox.getItems().add(i, result);
+        }
     }
-    /**
-     * Initializes the controller class.
-     */
+    
+    public void getCharacterStats() {
+        List results = em.createNamedQuery("Characters.findByName")
+                .setParameter("name", selectedCharacter)
+                .getResultList();
+        
+        Characters newChar = (Characters) results.get(0);
+        characterName = newChar.getName();
+        selectedClass = newChar.getClass1();
+        race = newChar.getRace();
+        level = newChar.getLevel();
+    }
+    
+    public void changeFields() {
+        characterNameLabel.setText("");
+        characterClassLabel.setText("");
+        characterRaceLabel.setText("");
+        characterLevelLabel.setText("");
+        
+        characterNameLabel.setText(characterName);
+        characterClassLabel.setText(selectedClass);
+        characterRaceLabel.setText(race);
+        characterLevelLabel.setText(Integer.toString(level));
+    }
+    
+    public void onSelectedCharacterChanged() {
+        characterChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                selectedCharacter = (String) characterChoiceBox.getItems().get((Integer) newValue);
+                System.out.println(selectedCharacter);
+                getCharacterStats();
+                changeFields();
+            }
+        });
+    }
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
+        setupApplication();
+        addCharactersToMenu();
+        onSelectedCharacterChanged();
+        if(characterChoiceBox.getItems().get(0) != null) {
+            selectedCharacter = (String) characterChoiceBox.getItems().get(0);
+        }
+        getCharacterStats();
+        changeFields();
+        
     }
 
 }

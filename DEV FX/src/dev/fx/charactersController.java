@@ -37,7 +37,7 @@ public class charactersController {
     EntityManager em = emf.createEntityManager();
     
     MainScreenController msc = new MainScreenController();
-    String userName = msc.username;
+    //String userName = msc.username;
     
     
     public void selectedClass() {
@@ -75,7 +75,7 @@ public class charactersController {
         Random rand = new Random();
         
         List results = em.createNamedQuery("Users.findByUserName")
-                .setParameter("userName", userName)
+                .setParameter("userName", LoginController.loginUser.getUserName())
                 .getResultList();
         
         if(results.size() > 0){
@@ -97,18 +97,18 @@ public class charactersController {
                 character.persist(character);
             }
             
-            insertInto();
+            insertIntoOwns();
             
             
         }
     }
 
-    public void insertInto() {
+    public void insertIntoOwns() {
         em.getTransaction().begin();
         try {
             em.createNativeQuery("INSERT INTO owns(name, user_name) VALUES (?,?)")
                     .setParameter(1, characterName.getText())
-                    .setParameter(2, userName)
+                    .setParameter(2, LoginController.loginUser.getUserName())
                     .executeUpdate();
             em.getTransaction().commit();
         } catch (Exception e) {
