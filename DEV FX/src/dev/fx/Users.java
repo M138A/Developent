@@ -189,6 +189,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
+        System.out.println("Hello");
         return "dev.fx.Users[ userName=" + userName + " ]";
     }
 
