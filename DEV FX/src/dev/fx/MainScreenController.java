@@ -7,6 +7,7 @@ package dev.fx;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -28,6 +29,12 @@ public class MainScreenController implements Initializable {
     private void setGUI()
     {
         usernameLabel.setText("Welcome " + user.getUserName());
+    }
+     @FXML
+    private void goToServer(ActionEvent event)
+    {
+        fxmlController c = new fxmlController();
+        c.goToRegistrationForm("servers.fxml", "Servers");
     }
     /**
      * Initializes the controller class.
