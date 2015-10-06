@@ -1,12 +1,14 @@
 package dev.fx;
 
 import java.awt.Toolkit;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -51,18 +53,13 @@ public class fxmlController extends DEVFX {
         }
     }
 
-    public void goToRegistrationForm(String fxmlURL, String Title) {
-        try {
-
-            root = FXMLLoader.load(getClass().getResource(fxmlURL));
-            theStage.setTitle(Title);
-            theStage.setScene(new Scene(root, 200,200));
-            theStage.centerOnScreen();
-            theStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void goToRegistrationForm(ActionEvent event, String fxmlURL, String Title) throws IOException{
+        Parent loginParent = FXMLLoader.load(getClass().getResource(fxmlURL));
+        Scene scene2 = new Scene(loginParent);
+        Stage app_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setTitle(Title);
+        app_stage.setScene(scene2);
+        app_stage.setResizable(false);
+        app_stage.show();
     }
-
 }

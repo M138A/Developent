@@ -5,11 +5,13 @@
  */
 package dev.fx;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,7 +21,6 @@ import javafx.scene.layout.AnchorPane;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javafx.fxml.FXMLLoader;
 
 /**
  *
@@ -45,9 +46,9 @@ public class LoginController implements Initializable {
     */
     
     @FXML
-    private void startRegistrationForm(ActionEvent event) {
+    private void startRegistrationForm(ActionEvent event) throws IOException {
         fxmlController x = new fxmlController();
-        x.goToRegistrationForm("registration.fxml", "Register" );
+        x.goToRegistrationForm(event, "registration.fxml", "Register" );
         
        /* String name = "Mark";
         Characters x = new Characters();

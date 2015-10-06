@@ -5,6 +5,7 @@
  */
 package dev.fx;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -31,16 +32,16 @@ public class MainScreenController implements Initializable {
         usernameLabel.setText("Welcome " + user.getUserName());
     }
      @FXML
-    private void goToServer(ActionEvent event)
+    private void goToServer(ActionEvent event) throws IOException
     {
         fxmlController c = new fxmlController();
-        c.goToRegistrationForm("servers.fxml", "Servers");
+        c.goToRegistrationForm(event, "servers.fxml", "Servers");
     }
      @FXML
-    private void goToCharacters(ActionEvent event)
+    private void goToCharacters(ActionEvent event) throws IOException
     {
         fxmlController c = new fxmlController();
-        c.goToRegistrationForm("characters.fxml", "Characters");
+        c.goToRegistrationForm(event, "characters.fxml", "Characters");
     }
     /**
      * Initializes the controller class.
