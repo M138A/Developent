@@ -36,6 +36,12 @@ public class MainScreenController implements Initializable {
         fxmlController c = new fxmlController();
         c.goToRegistrationForm("servers.fxml", "Servers");
     }
+     @FXML
+    private void goToCharacters(ActionEvent event)
+    {
+        fxmlController c = new fxmlController();
+        c.goToRegistrationForm("characters.fxml", "Characters");
+    }
     /**
      * Initializes the controller class.
      */
