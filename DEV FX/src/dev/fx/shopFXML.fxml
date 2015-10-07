@@ -10,7 +10,7 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="dev.fx.ShopFXMLController">
   <children>
     <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToMainScreen" text="Back" />
-    <Button layoutX="104.0" layoutY="187.0" mnemonicParsing="false" onAction="#buySlots" text="Buy slots" />
+    <Button layoutX="97.0" layoutY="187.0" mnemonicParsing="false" onAction="#buySlots" text="Buy slots" />
     <Button layoutX="274.0" layoutY="193.0" mnemonicParsing="false" onAction="#addMoney" text="Add money" />
     <Button layoutX="431.0" layoutY="190.0" mnemonicParsing="false" onAction="#renSub" text="Renovate subscription" />
     <Label layoutX="282.0" layoutY="2.0" text="Shop">
@@ -18,11 +18,11 @@
         <Font size="20.0" />
       </font>
     </Label>
-    <Label fx:id="balanceLabel" layoutX="500.0" layoutY="19.0" text="TODO" />
+    <Label fx:id="balanceLabel" layoutX="500.0" layoutY="19.0" text="" />
     <Label layoutX="82.0" layoutY="66.0" text="Buy character slots" />
     <Label layoutX="254.0" layoutY="66.0" text="Add money to account" />
     <Label layoutX="431.0" layoutY="66.0" text="Renovate subscription" />
-    <TextField fx:id="characterAmountField" layoutX="97.0" layoutY="112.0" prefWidth="71.0" promptText="amount" />
+    <TextField fx:id="characterAmountField" layoutX="97.0" layoutY="115.0" prefWidth="71.0" promptText="amount" />
     <TextField fx:id="moneyAmountField" layoutX="279.0" layoutY="112.0" prefWidth="71.0" promptText="amount" />
     <RadioButton fx:id="radioOneMonth" layoutX="431.0" layoutY="96.0" mnemonicParsing="false" text="1 month">
       <toggleGroup>
@@ -32,7 +32,7 @@
     <RadioButton fx:id="radioTwoMonth" layoutX="431.0" layoutY="118.0" mnemonicParsing="false" text="2 months" toggleGroup="$subGroup" />
     <RadioButton fx:id="radioThreeMonth" layoutX="431.0" layoutY="141.0" mnemonicParsing="false" text="3 months" toggleGroup="$subGroup" />
     <RadioButton fx:id="radioTwelveMonth" layoutX="431.0" layoutY="164.0" mnemonicParsing="false" text="1 year" toggleGroup="$subGroup" />
-    <Label fx:id="currentSlotsLabel" layoutX="110.0" layoutY="156.0" text="" />
-    <Label fx:id="monthsRemainingLabel" layoutX="476.0" layoutY="230.0" text="Label" />
+    <Label fx:id="currentSlotsLabel" layoutX="70.0" layoutY="230.0" text="" />
+    <Label fx:id="monthsRemainingLabel" layoutX="440.0" layoutY="230.0" text="" />
   </children>
 </AnchorPane>

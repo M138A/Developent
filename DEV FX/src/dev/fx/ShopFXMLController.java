@@ -44,7 +44,7 @@ public class ShopFXMLController implements Initializable {
     private ToggleGroup subGroup;
 
     private void setCurrentSlots() {
-        currentSlotsLabel.setText(String.valueOf(user.getCharacterSlots()));
+        currentSlotsLabel.setText("Current number of slots: " + String.valueOf(user.getCharacterSlots()));
     }
 
     public void setUser(Users x) {
@@ -79,6 +79,7 @@ public class ShopFXMLController implements Initializable {
             numberOfSlots += user.getCharacterSlots();
             user.setCharacterSlots(numberOfSlots);
             mergeEntityObject(user);
+            characterAmountField.setText("");
             setCurrentSlots();
         }
         else
@@ -102,6 +103,7 @@ public class ShopFXMLController implements Initializable {
         moneyAmount += user.getBalance();
         user.setBalance(moneyAmount);
         mergeEntityObject(user);
+        moneyAmountField.setText("");
         setBalanceLabel();
 
     }
@@ -160,7 +162,7 @@ public class ShopFXMLController implements Initializable {
     private int refreshsub(Calendar lastPayment, Calendar now) {
         int diffYear = lastPayment.get(Calendar.YEAR) - now.get(Calendar.YEAR);
         int diffMonth = diffYear * 12 + lastPayment.get(Calendar.MONTH) - now.get(Calendar.MONTH);
-        monthsRemainingLabel.setText(String.valueOf(diffMonth));
+        monthsRemainingLabel.setText("Months remaining: " + String.valueOf(diffMonth));
         user.setMonthsPayed(diffMonth);
         mergeEntityObject(user);
         return diffMonth;
@@ -195,15 +197,19 @@ public class ShopFXMLController implements Initializable {
 
     private int getSelectedRadioButton() {
         if (radioOneMonth.isSelected()) {
+            radioOneMonth.setSelected(false);
             return 1;
         }
         if (radioTwoMonth.isSelected()) {
+            radioTwoMonth.setSelected(false);
             return 2;
         }
         if (radioThreeMonth.isSelected()) {
+            radioThreeMonth.setSelected(false);
             return 3;
         }
         if (radioTwelveMonth.isSelected()) {
+            radioTwelveMonth.setSelected(false);
             return 12;
         }
         return -1;
