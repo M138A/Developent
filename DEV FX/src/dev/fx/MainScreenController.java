@@ -78,8 +78,8 @@ public class MainScreenController implements Initializable {
 
     @FXML
     private void goToCharacters(ActionEvent event) throws IOException {
-        fxmlController c = new fxmlController();
-        c.goToRegistrationForm(event, "characters.fxml", "Characters",0);
+        fxmlController c = new fxmlController(user);
+        c.goToRegistrationForm(event, "characters.fxml", "Characters",3);
     }
     
     /*

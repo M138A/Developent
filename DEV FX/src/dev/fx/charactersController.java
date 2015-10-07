@@ -38,7 +38,12 @@ public class charactersController {
     
     MainScreenController msc = new MainScreenController();
     //String userName = msc.username;
-    
+    private Users user;
+    public void setUser(Users u)
+    {
+        user = u;
+        System.out.println(user);
+    }
     
     public void selectedClass() {
         if(assassinClass.isSelected()) {

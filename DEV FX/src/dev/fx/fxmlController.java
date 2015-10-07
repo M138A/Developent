@@ -76,6 +76,11 @@ public class fxmlController extends DEVFX {
                 // init data
                 controller.setUser(u);
             }
+            if (ControllerType == 3) {
+                charactersController controller = loader.<charactersController>getController();        
+                // init data
+                controller.setUser(u);
+            }
         app_stage.setResizable(false);
         app_stage.show();
     }

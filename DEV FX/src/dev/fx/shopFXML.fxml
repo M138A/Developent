@@ -18,19 +18,20 @@
         <Font size="20.0" />
       </font>
     </Label>
-    <Label fx:id="balanceLabel" layoutX="546.0" layoutY="14.0" text="TODO" />
+    <Label fx:id="balanceLabel" layoutX="500.0" layoutY="19.0" text="TODO" />
     <Label layoutX="82.0" layoutY="66.0" text="Buy character slots" />
     <Label layoutX="254.0" layoutY="66.0" text="Add money to account" />
     <Label layoutX="431.0" layoutY="66.0" text="Renovate subscription" />
     <TextField fx:id="characterAmountField" layoutX="97.0" layoutY="112.0" prefWidth="71.0" promptText="amount" />
     <TextField fx:id="moneyAmountField" layoutX="279.0" layoutY="112.0" prefWidth="71.0" promptText="amount" />
-    <RadioButton layoutX="431.0" layoutY="96.0" mnemonicParsing="false" text="1 month">
+    <RadioButton fx:id="radioOneMonth" layoutX="431.0" layoutY="96.0" mnemonicParsing="false" text="1 month">
       <toggleGroup>
         <ToggleGroup fx:id="subGroup" />
       </toggleGroup>
     </RadioButton>
-    <RadioButton layoutX="431.0" layoutY="118.0" mnemonicParsing="false" text="2 months" toggleGroup="$subGroup" />
-    <RadioButton layoutX="431.0" layoutY="141.0" mnemonicParsing="false" text="3 months" toggleGroup="$subGroup" />
-    <RadioButton layoutX="431.0" layoutY="164.0" mnemonicParsing="false" text="1 year" toggleGroup="$subGroup" />
+    <RadioButton fx:id="radioTwoMonth" layoutX="431.0" layoutY="118.0" mnemonicParsing="false" text="2 months" toggleGroup="$subGroup" />
+    <RadioButton fx:id="radioThreeMonth" layoutX="431.0" layoutY="141.0" mnemonicParsing="false" text="3 months" toggleGroup="$subGroup" />
+    <RadioButton fx:id="radioTwelveMonth" layoutX="431.0" layoutY="164.0" mnemonicParsing="false" text="1 year" toggleGroup="$subGroup" />
+    <Label fx:id="currentSlotsLabel" layoutX="110.0" layoutY="156.0" text="" />
   </children>
 </AnchorPane>
