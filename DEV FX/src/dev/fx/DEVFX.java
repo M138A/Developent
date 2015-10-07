@@ -27,7 +27,7 @@ public class DEVFX extends Application {
  
     @Override
     public void start(Stage stage) throws Exception {        
-          root = FXMLLoader.load(getClass().getResource("mainfxml.fxml"));  
+          root = FXMLLoader.load(getClass().getResource("servers.fxml"));  
           
           theStage = stage;
             theStage.setTitle("Login");
