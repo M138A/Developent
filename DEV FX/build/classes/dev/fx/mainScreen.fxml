@@ -13,7 +13,7 @@
     <Label id="usernameLabel" fx:id="balanceLabel" layoutX="24.0" layoutY="14.0" prefWidth="41.0" text="" />
       <VBox alignment="CENTER" layoutX="475.0" layoutY="166.0" prefHeight="220.0" prefWidth="111.0">
          <children>
-            <Button mnemonicParsing="false" text="Shop">
+            <Button mnemonicParsing="false" text="Shop" onAction="#goToShop">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>

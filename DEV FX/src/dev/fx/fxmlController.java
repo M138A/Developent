@@ -27,7 +27,7 @@ public class fxmlController extends DEVFX {
 
     }
 
-    public void setMainStage(String Title, String fxmlURL, int size1, int size2) {
+   /* public void setMainStage(String Title, String fxmlURL, int size1, int size2, int ControllerType) {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource(
@@ -41,10 +41,16 @@ public class fxmlController extends DEVFX {
                     )
             );
             //AnchorPane pane = (AnchorPane) loader.load();
-
-            MainScreenController controller = loader.<MainScreenController>getController();
-            // init data
-            controller.setUser(u);
+            if (ControllerType == 1) {
+                MainScreenController controller = loader.<MainScreenController>getController();
+                // init data
+                controller.setUser(u);
+            }
+            if (ControllerType == 2) {
+                ShopFXMLController controller = loader.<ShopFXMLController>getController();
+                // init data
+                controller.setUser(u);
+            }
             theStage.close();
             stage.show();
 
@@ -52,13 +58,24 @@ public class fxmlController extends DEVFX {
             Logger.getLogger(fxmlController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void goToRegistrationForm(ActionEvent event, String fxmlURL, String Title) throws IOException{
-        Parent loginParent = FXMLLoader.load(getClass().getResource(fxmlURL));
+*/
+    public void goToRegistrationForm(ActionEvent event, String fxmlURL, String Title, int ControllerType) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlURL));
+        Parent loginParent = (Parent) loader.load();        
         Scene scene2 = new Scene(loginParent);
-        Stage app_stage = (Stage)  ((Node) event.getSource()).getScene().getWindow();
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();     
         app_stage.setTitle(Title);
         app_stage.setScene(scene2);
+        if (ControllerType == 1) {
+                MainScreenController controller = loader.<MainScreenController>getController();
+                // init data
+                controller.setUser(u);
+            }
+           if (ControllerType == 2) {
+                ShopFXMLController controller = loader.<ShopFXMLController>getController();        
+                // init data
+                controller.setUser(u);
+            }
         app_stage.setResizable(false);
         app_stage.show();
     }

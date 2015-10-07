@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,7 +51,7 @@ public class LoginController implements Initializable {
     @FXML
     private void startRegistrationForm(ActionEvent event) throws IOException {
         fxmlController x = new fxmlController();
-        x.goToRegistrationForm(event, "registration.fxml", "Register" );
+        x.goToRegistrationForm(event, "registration.fxml", "Register",0 );
         
        /* String name = "Mark";
         Characters x = new Characters();
@@ -71,10 +73,13 @@ public class LoginController implements Initializable {
         
         
     }
+    private ActionEvent ev;
     @FXML
     private void checkInput(ActionEvent event) {
+        
         if(!usernameField.getText().equals("") && !passwordField.getText().equals(""))
         {
+            ev = event;
             processLogin(usernameField.getText(), passwordField.getText());
         }
         else
@@ -84,8 +89,12 @@ public class LoginController implements Initializable {
     }
     private void moveToMainScreen(Users loggingInUser)
     {
-        fxmlController controller = new fxmlController(loggingInUser);
-        controller.setMainStage("Main", "mainScreen.fxml", 600,600);
+        try {
+            fxmlController controller = new fxmlController(loggingInUser);
+            controller.goToRegistrationForm(ev,"mainScreen.fxml", "Main", 1);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     private void processLogin(String user, String pass)

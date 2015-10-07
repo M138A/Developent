@@ -66,19 +66,20 @@ public class MainScreenController implements Initializable {
     @FXML
     private void goToShop(ActionEvent event) throws IOException
     {
-        fxmlController c = new fxmlController();
-        c.goToRegistrationForm(event, "shopFXML.fxml", "Shop");
+        fxmlController c = new fxmlController(user);
+        //c.goToRegistrationForm(event, "shopFXML.fxml", "Shop");
+        c.goToRegistrationForm(event,"shopFXML.fxml", "Shop", 2);
     }
     @FXML
     private void goToServer(ActionEvent event) throws IOException {
         fxmlController c = new fxmlController();
-        c.goToRegistrationForm(event, "servers.fxml", "Servers");
+        c.goToRegistrationForm(event, "servers.fxml", "Servers",0);
     }
 
     @FXML
     private void goToCharacters(ActionEvent event) throws IOException {
         fxmlController c = new fxmlController();
-        c.goToRegistrationForm(event, "characters.fxml", "Characters");
+        c.goToRegistrationForm(event, "characters.fxml", "Characters",0);
     }
     
     /*
@@ -169,7 +170,7 @@ public class MainScreenController implements Initializable {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 selectedCharacter = (String) characterChoiceBox.getItems().get((Integer) newValue);
                 System.out.println(selectedCharacter);
-                getCharacterStats();
+//                getCharacterStats();
                 changeFields();
             }
         });
@@ -185,7 +186,7 @@ public class MainScreenController implements Initializable {
         if(characterChoiceBox.getItems().get(0) != null) {
             selectedCharacter = (String) characterChoiceBox.getItems().get(0);
         }
-        getCharacterStats();
+//        getCharacterStats();
         changeFields();
         
     }

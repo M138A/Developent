@@ -5,9 +5,12 @@
  */
 package dev.fx;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,6 +38,7 @@ public class RegistrationController implements Initializable {
     private PasswordField password;
     @FXML
     private Label messageLabel;
+    private ActionEvent ev;
      @FXML
     private void checkInput(ActionEvent event)
     {
@@ -44,6 +48,7 @@ public class RegistrationController implements Initializable {
         } 
         else if (checkNonExistingUser())
         {
+            ev = event;
             register();
         }
         else
@@ -68,8 +73,14 @@ public class RegistrationController implements Initializable {
     }
     private void goToMainScreen(Users u)
     {
-        fxmlController x = new fxmlController(u);
-        x.setMainStage("Register", "mainScreen.fxml", 700, 700);
+        
+        try {
+            fxmlController x = new fxmlController(u);
+            x.goToRegistrationForm(ev,"mainScreen.fxml", "Main", 1);
+        } catch (IOException ex) {
+            Logger.getLogger(RegistrationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     private boolean checkNonExistingUser()
     {
