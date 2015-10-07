@@ -5,122 +5,108 @@
  */
 package dev.fx;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
+ * FXML Controller class
  *
  * @author briang
  */
 public class ServerController implements Initializable {
-    
-    @FXML
-    private ListView serverList;
-    @FXML
-    private Label serverCountLabel;
-    @FXML
-    private TableView<serverTableEntry> serversTable;
-    @FXML
-    private TableColumn<serverTableEntry, String> adress; 
-    @FXML
-    private TableColumn<serverTableEntry, Integer> users; 
-    @FXML
-    private TableColumn<serverTableEntry, String> location; 
-    @FXML
-    private TableColumn<serverTableEntry, Integer> maxUsers; 
-    @FXML
-    private TableColumn<serverTableEntry, String> name;
-    
-    private ObservableList<serverTableEntry> serverData;
-    private int serverCount = 0;
-    private String serverAdress;
-    private int connectedUsers;
-    private String serverLocation;
-    private int serverMaxUsers;
-    private String serverName;
-    private Collection<Users> UsersCollection;
 
-       @Override
-    public void initialize(URL location, ResourceBundle resources) {
-            
-        getServers();
-            
-            /*TableColumn address = new TableColumn("Address");
-            address.setCellFactory(new PropertyValueFactory<serverTableEntry, String>(""));*/
-    }
+    private String hide = "Hide Info";
+    private int joinUsers;
+    private Servers s;
     
-    public void getServers()
-    {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DEV_FXPU");
-        EntityManager em = emf.createEntityManager();        
-        List results = em.createNamedQuery("Servers.findAll")
-                .getResultList();
-        if(!results.isEmpty())
-        {
-            serverData = FXCollections.observableArrayList();
-           for (int i=0 ;i < results.size(); i++)
-           {
-              Servers s = (Servers) results.get(i);
-              serverAdress = s.getAdress();
-              connectedUsers = s.getConnectedUsers();
-              serverLocation = s.getLocation();
-              serverMaxUsers = s.getMaxUsers();
-              serverName = s.getName();
-              
-              serverTableEntry se = new serverTableEntry(serverAdress, connectedUsers, serverLocation, serverMaxUsers, serverName);
-              serverData.add(se);
-               
-            }
-               
-                adress.setCellValueFactory(new PropertyValueFactory<dev.fx.serverTableEntry, String>("adress"));
-                users.setCellValueFactory(new PropertyValueFactory<dev.fx.serverTableEntry, Integer>("users"));
-                location.setCellValueFactory(new PropertyValueFactory<dev.fx.serverTableEntry, String>("location"));        
-                maxUsers.setCellValueFactory(new PropertyValueFactory<dev.fx.serverTableEntry, Integer>("maxUsers"));        
-                name.setCellValueFactory(new PropertyValueFactory<dev.fx.serverTableEntry, String>("name"));
-            
-                
-                serversTable.setItems(serverData);
-                
-                setServers();
-                serverCount += 1;
-           }
-        else
-        {
-            setServers();
-            serverCountLabel.setText("Aantal Servers beschikbaar: " + serverCount);
+    @FXML 
+    private Label labelAantal;
+    @FXML 
+    private Label labelAdress;
+    @FXML 
+    private Label labelName;
+    @FXML 
+    private Button showInfo;
+    
+    private String serverUsers;
+    private String serverAdress;
+    private String serverName;
+    
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+       
+    }    
+
+    public void setS(Servers s) {
+        this.s = s;
+       
+        
+         if (s == null) {
+            throw new NullPointerException("No server defined");
         }
-           
+    }
+   
+    
+    public void backToServers(ActionEvent event) throws IOException
+   {
+        joinUsers = s.getConnectedUsers();
+        joinUsers = joinUsers - 1;
+        
+        
+        s.setConnectedUsers(joinUsers);
+       
+        ShopFXMLController f = new ShopFXMLController();
+        f.mergeEntityObject(s);
+        
         
        
-    }
-    
-    public void joinServer()
+       fxmlController x = new fxmlController();
+       x.goToRegistrationForm(event, "servers.fxml", null, 5);
+   
+}
+    public void showServerInfo(ActionEvent event)
     {
+        serverUsers = s.getConnectedUsers().toString();
+        serverAdress = s.getAdress();
+        serverName = s.getName();
         
+        System.out.print(serverUsers);
+       
+        
+        
+        
+        if (showInfo.getText() == hide)
+        {
+            showInfo.setText("Info");
+            labelAantal.setVisible(false);
+            labelAdress.setVisible(false);
+            labelName.setVisible(false);
+        }
+        else 
+        {
+            showInfo.setText(hide);
+            
+             labelAantal.setVisible(true);
+            labelAdress.setVisible(true);
+            labelName.setVisible(true);
+            labelAantal.setText("Users op server : " + serverUsers);
+            labelAdress.setText("Server adress : " + serverAdress);
+            labelName.setText("Server Name : " + serverName);
+        }
     }
 
-    public void exitServer()
-    {
-        
-    }
-    
-    public void setServers()
-    {
-        
-    }
-      
+   
 }

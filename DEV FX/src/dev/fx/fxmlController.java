@@ -18,9 +18,16 @@ import javafx.stage.Stage;
 public class fxmlController extends DEVFX {
 
     private Users u = null;
-
+    private Servers s = null;
+    
+    
+    
     public fxmlController(Users x) {
         u = x;
+    }
+    
+    public fxmlController(Servers a){
+        s = a;
     }
 
     public fxmlController() {
@@ -80,6 +87,15 @@ public class fxmlController extends DEVFX {
                 charactersController controller = loader.<charactersController>getController();        
                 // init data
                 controller.setUser(u);
+                
+            }
+            if (ControllerType == 4) {
+                ServerController controller = loader.<ServerController>getController();
+                controller.setS(s);
+            }
+            if (ControllerType == 5) {
+                ServersController controller = loader.<ServersController>getController();
+                controller.setS(s);
             }
         app_stage.setResizable(false);
         app_stage.show();
