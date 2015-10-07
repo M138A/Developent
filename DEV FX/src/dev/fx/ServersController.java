@@ -55,7 +55,6 @@ public class ServersController implements Initializable {
     
     private ActionEvent event;
     private ObservableList<serverTableEntry> serverData;
-    private int serverCount = 0;
     private String serverAdress;
     private int connectedUsers;
     private String serverLocation;
