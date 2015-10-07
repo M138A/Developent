@@ -63,7 +63,12 @@ public class MainScreenController implements Initializable {
         em = emf.createEntityManager();
         //setBalanceLabel();   
     }
-
+    @FXML
+    private void goToShop(ActionEvent event) throws IOException
+    {
+        fxmlController c = new fxmlController();
+        c.goToRegistrationForm(event, "shopFXML.fxml", "Shop");
+    }
     @FXML
     private void goToServer(ActionEvent event) throws IOException {
         fxmlController c = new fxmlController();
