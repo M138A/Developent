@@ -131,12 +131,14 @@ public class MainScreenController implements Initializable {
                 .setParameter(1, LoginController.loginUser.getUserName())
                 .getResultList();
         
-        String name = (String) results.get(0);
-        characterChoiceBox.setValue(name);
+        if(!results.isEmpty()) {              
+            String name = (String) results.get(0);
+            characterChoiceBox.setValue(name);
         
-        for(int i = 0; i < results.size(); i++) {
-            String result = (String) results.get(i);
-            characterChoiceBox.getItems().add(i, result);
+            for(int i = 0; i < results.size(); i++) {
+                String result = (String) results.get(i);
+                characterChoiceBox.getItems().add(i, result);
+            }
         }
     }
     
@@ -145,11 +147,13 @@ public class MainScreenController implements Initializable {
                 .setParameter("name", selectedCharacter)
                 .getResultList();
         
-        Characters newChar = (Characters) results.get(0);
-        characterName = newChar.getName();
-        selectedClass = newChar.getClass1();
-        race = newChar.getRace();
-        level = newChar.getLevel();
+        if(!results.isEmpty()) {      
+            Characters newChar = (Characters) results.get(0);
+            characterName = newChar.getName();
+            selectedClass = newChar.getClass1();
+            race = newChar.getRace();
+            level = newChar.getLevel();
+        }
     }
     
     public void changeFields() {
@@ -170,7 +174,7 @@ public class MainScreenController implements Initializable {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 selectedCharacter = (String) characterChoiceBox.getItems().get((Integer) newValue);
                 System.out.println(selectedCharacter);
-//                getCharacterStats();
+                getCharacterStats();
                 changeFields();
             }
         });
@@ -182,11 +186,13 @@ public class MainScreenController implements Initializable {
         // TODO
         setupApplication();
         addCharactersToMenu();
-        onSelectedCharacterChanged();
-        if(characterChoiceBox.getItems().get(0) != null) {
+        onSelectedCharacterChanged();        
+        
+        if(!characterChoiceBox.getItems().isEmpty()) {
             selectedCharacter = (String) characterChoiceBox.getItems().get(0);
         }
-//        getCharacterStats();
+        
+        getCharacterStats();
         changeFields();
         
     }
