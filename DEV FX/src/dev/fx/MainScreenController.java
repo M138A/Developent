@@ -56,12 +56,18 @@ public class MainScreenController implements Initializable {
 
     public void setUser(Users user) {
         this.user = user;
+        
+        setupApplication();
+        addCharactersToMenu();
+        
+        emf = null;
+        em = null;
     }
     
     private void setupApplication() {
         emf = Persistence.createEntityManagerFactory("DEV_FXPU");
         em = emf.createEntityManager();
-        //setBalanceLabel();   
+        //setBalanceLabel(); 
     }
     @FXML
     private void goToShop(ActionEvent event) throws IOException
@@ -128,7 +134,7 @@ public class MainScreenController implements Initializable {
     
     public void addCharactersToMenu() {
         List results = em.createNativeQuery("SELECT name FROM owns WHERE user_name = ?")
-                .setParameter(1, LoginController.loginUser.getUserName())
+                .setParameter(1, user.getUserName())
                 .getResultList();
         
         if(!results.isEmpty()) {              
@@ -185,7 +191,6 @@ public class MainScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         setupApplication();
-        addCharactersToMenu();
         onSelectedCharacterChanged();        
         
         if(!characterChoiceBox.getItems().isEmpty()) {

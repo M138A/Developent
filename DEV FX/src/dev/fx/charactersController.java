@@ -80,7 +80,7 @@ public class charactersController {
         Random rand = new Random();
         
         List results = em.createNamedQuery("Users.findByUserName")
-                .setParameter("userName", LoginController.loginUser.getUserName())
+                .setParameter("userName", user.getUserName())
                 .getResultList();
         
         if(results.size() > 0){
@@ -113,7 +113,7 @@ public class charactersController {
         try {
             em.createNativeQuery("INSERT INTO owns(name, user_name) VALUES (?,?)")
                     .setParameter(1, characterName.getText())
-                    .setParameter(2, LoginController.loginUser.getUserName())
+                    .setParameter(2, user.getUserName())
                     .executeUpdate();
             em.getTransaction().commit();
         } catch (Exception e) {
