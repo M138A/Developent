@@ -59,9 +59,6 @@ public class MainScreenController implements Initializable {
         
         setupApplication();
         addCharactersToMenu();
-        
-        emf = null;
-        em = null;
     }
     
     private void setupApplication() {
