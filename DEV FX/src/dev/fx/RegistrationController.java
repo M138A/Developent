@@ -85,6 +85,12 @@ public class RegistrationController implements Initializable {
         }
         
     }
+    
+    public void goToLogin(ActionEvent ev) throws IOException{
+        fxmlController x = new fxmlController();
+        x.goToRegistrationForm(ev,"mainfxml.fxml", "Login", 0);
+    }
+    
     private boolean checkNonExistingUser()
     {
          EntityManagerFactory emf = Persistence.createEntityManagerFactory("DEV_FXPU");
@@ -92,14 +98,7 @@ public class RegistrationController implements Initializable {
         List results = em.createNamedQuery("Users.findByUserName")
                 .setParameter("userName", username.getText())
                 .getResultList();
-        if(results.size() == 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return results.isEmpty();
     }
     
     /**

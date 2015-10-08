@@ -21,7 +21,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false"  prefWidth="86.0" text="Account" onAction="#goToAccount">
+            <Button mnemonicParsing="false" onAction="#goToAccount" prefWidth="86.0" text="Account">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
@@ -126,6 +126,6 @@
             <Insets bottom="5.0" />
          </padding>
       </VBox>
-      <ChoiceBox fx:id="characterChoiceBox" layoutX="24.0" layoutY="52.0" prefHeight="31.0" prefWidth="130.0" />
+      <ChoiceBox fx:id="characterChoiceBox" layoutX="25.0" layoutY="25.0" prefHeight="31.0" prefWidth="130.0" />
   </children>
 </AnchorPane>
