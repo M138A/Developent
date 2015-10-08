@@ -48,7 +48,7 @@ public class ServerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        
-        Runtime.getRuntime().addShutdownHook(new Thread()
+   Runtime.getRuntime().addShutdownHook(new Thread()
   {
     @Override
     public void run()
