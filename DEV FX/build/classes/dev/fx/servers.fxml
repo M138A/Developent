@@ -21,5 +21,6 @@
       <TextField fx:id="serverJoin" layoutX="214.0" layoutY="440.0" promptText="Type serveradress" />
       <Button layoutX="582.0" layoutY="440.0" mnemonicParsing="false" onAction="#pickServer" text="Join server" />
       <Label fx:id="serverError" layoutX="308.0" layoutY="501.0" text="" />
+      <Button layoutX="46.0" layoutY="79.0" mnemonicParsing="false" onAction="#toMainMenu" text="Main Menu" />
    </children>
 </AnchorPane>

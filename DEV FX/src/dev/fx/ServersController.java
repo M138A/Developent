@@ -187,6 +187,11 @@ public class ServersController implements Initializable {
             serverError.setText("Server is Vol");
         }
     }
-
+    
+    public void toMainMenu (ActionEvent event) throws IOException
+    {
+        fxmlController x = new fxmlController();
+        x.goToRegistrationForm(event,"mainScreen.fxml","Main" , 1);
+    }
       
 }
