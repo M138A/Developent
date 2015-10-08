@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -83,8 +85,8 @@ public class ServerController implements Initializable {
     }
    
     
-    public void backToServers(ActionEvent event) throws IOException
-   {
+    public void backToServers(ActionEvent event)
+    {
         joinUsers = s.getConnectedUsers();
         joinUsers = joinUsers - 1;
         
@@ -95,11 +97,15 @@ public class ServerController implements Initializable {
         f.mergeEntityObject(s);
         
         
-       
-       fxmlController x = new fxmlController(u);
-       x.goToRegistrationForm(event, "servers.fxml", null, 5);
+        try {
+            fxmlController x = new fxmlController(u);
+            x.goToRegistrationForm(event, "servers.fxml", null, 5);
+        } catch(IOException ex) {
+            Logger.getLogger(ShopFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
    
-}
+    }
+    
     public void showServerInfo()
     {
         serverUsers = s.getConnectedUsers().toString();

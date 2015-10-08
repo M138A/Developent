@@ -39,7 +39,8 @@ public class RegistrationController implements Initializable {
     @FXML
     private Label messageLabel;
     private ActionEvent ev;
-     @FXML
+    
+    @FXML
     private void checkInput(ActionEvent event)
     {
         if(name.getText().isEmpty() || surname.getText().isEmpty() || username.getText().isEmpty() || password.getText().isEmpty())
@@ -56,6 +57,7 @@ public class RegistrationController implements Initializable {
             messageLabel.setText("User already exists.");
         }
     }
+    
     private void register()
     {
         
@@ -74,6 +76,7 @@ public class RegistrationController implements Initializable {
         goToMainScreen(newUser);
         
     }
+    
     private void goToMainScreen(Users u)
     {
         
@@ -86,9 +89,13 @@ public class RegistrationController implements Initializable {
         
     }
     
-    public void goToLogin(ActionEvent ev) throws IOException{
-        fxmlController x = new fxmlController();
-        x.goToRegistrationForm(ev,"mainfxml.fxml", "Login", 0);
+    public void goToLogin(ActionEvent ev){
+        try {
+            fxmlController x = new fxmlController();
+            x.goToRegistrationForm(ev,"mainfxml.fxml", "Login", 0);
+        } catch(IOException ex) {
+            Logger.getLogger(ShopFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private boolean checkNonExistingUser()

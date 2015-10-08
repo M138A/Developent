@@ -6,8 +6,12 @@
 
 package dev.fx;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -124,6 +128,12 @@ public class charactersController {
         }
     }
     
-    
-    
+    public void toMainMenu(ActionEvent event){
+        fxmlController c = new fxmlController(user);   
+        try {
+            c.goToRegistrationForm(event, "mainScreen.fxml", "Main", 1);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

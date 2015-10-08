@@ -197,7 +197,7 @@ public class ServersController implements Initializable {
         }
     }
     
-    public void toMainMenu (ActionEvent event) throws IOException
+    public void toMainMenu (ActionEvent event)
     {
         fxmlController c = new fxmlController(u);
         try {

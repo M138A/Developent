@@ -31,15 +31,8 @@ import javax.persistence.Query;
  * @author M. Hartgring
  */
 public class MainScreenController implements Initializable {
-    
-    //@FXML
-    //private Label paymentLabel, balanceLabel;
+
     private Users user = null;
-    //@FXML
-    //private Button ibanSubmitButton;
-    //@FXML
-    //TextField ibanField, amountField; */
-    //public static String username;
     @FXML
     Label characterNameLabel, characterRaceLabel, characterClassLabel, characterLevelLabel;
     
@@ -50,7 +43,6 @@ public class MainScreenController implements Initializable {
     private String selectedCharacter;
     EntityManagerFactory emf;
     EntityManager em;
-    
     
     
     @FXML
@@ -66,8 +58,8 @@ public class MainScreenController implements Initializable {
     private void setupApplication() {
         emf = Persistence.createEntityManagerFactory("DEV_FXPU");
         em = emf.createEntityManager();
-        //setBalanceLabel(); 
     }
+    
     @FXML
     private void goToAccount(ActionEvent event)
     {
@@ -79,68 +71,38 @@ public class MainScreenController implements Initializable {
             Logger.getLogger(MainScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     @FXML
-    private void goToShop(ActionEvent event) throws IOException
+    private void goToShop(ActionEvent event)
     {
-        fxmlController c = new fxmlController(user);
-        //c.goToRegistrationForm(event, "shopFXML.fxml", "Shop");
-        c.goToRegistrationForm(event,"shopFXML.fxml", "Shop", 2);
+        try {
+            fxmlController c = new fxmlController(user);
+            //c.goToRegistrationForm(event, "shopFXML.fxml", "Shop");
+            c.goToRegistrationForm(event,"shopFXML.fxml", "Shop", 2);
+        } catch(IOException ex) {
+            Logger.getLogger(ShopFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+    
     @FXML
-    private void goToServer(ActionEvent event) throws IOException {
-        fxmlController c = new fxmlController(user);
-        c.goToRegistrationForm(event, "servers.fxml", "Servers",7);
+    private void goToServer(ActionEvent event){
+        try {
+            fxmlController c = new fxmlController(user);
+            c.goToRegistrationForm(event, "servers.fxml", "Servers",7);
+        } catch(IOException ex) {
+            Logger.getLogger(ShopFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
-    private void goToCharacters(ActionEvent event) throws IOException {
-        fxmlController c = new fxmlController(user);
-        c.goToRegistrationForm(event, "characters.fxml", "Characters",3);
-    }
-    
-    /*
-    private void setBalanceLabel()
-    {
-        balanceLabel.setText("Your balance: € " + String.valueOf(user.getBalance()));
-    }
-    
-    @FXML
-    public void insertIBAN(ActionEvent action) {
-        em.getTransaction().begin();
+    private void goToCharacters(ActionEvent event){
         try {
-            em.createNativeQuery("UPDATE users SET iban=? WHERE user_name=?")
-                    .setParameter(1, ibanField.getText())
-                    .setParameter(2, user.getUserName())
-                    .executeUpdate();
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }    
+            fxmlController c = new fxmlController(user);
+            c.goToRegistrationForm(event, "characters.fxml", "Characters",3);
+        } catch(IOException ex) {
+            Logger.getLogger(ShopFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
-    @FXML
-    public void addMoney(ActionEvent event)
-    {
-        int amount = Integer.valueOf(amountField.getText());
-        amount += user.getBalance();
-        em.getTransaction().begin();
-        try {
-            em.createNativeQuery("UPDATE users SET balance=? WHERE user_name=?")
-                    .setParameter(1, amount)
-                    .setParameter(2, user.getUserName())
-                    .executeUpdate();
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }  
-    } */
-    
     
     public void addCharactersToMenu() {
         List results =  em.createNativeQuery("SELECT o.name FROM owns as o, characters as c WHERE o.user_name = ? AND o.name = c.name ORDER BY c.level DESC")

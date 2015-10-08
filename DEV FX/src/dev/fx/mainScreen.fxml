@@ -37,7 +37,7 @@
                   <Font size="14.0" />
                </font>
             </Button>
-          <Button fx:id="serverButton" mnemonicParsing="false" onAction="#goToServer" text="Play">
+          <Button fx:id="serverButton" mnemonicParsing="false" onAction="#goToServer" prefWidth="86.0" text="Play">
                <padding>
                   <Insets bottom="3.0" left="20.0" right="20.0" top="3.0" />
                </padding>
@@ -50,7 +50,7 @@
             </Button>
          </children>
       </VBox>
-      <Label layoutX="254.0" layoutY="16.0" text="Characters">
+      <Label layoutX="196.0" layoutY="14.0" text="Character Management">
          <font>
             <Font size="20.0" />
          </font>
