@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -65,6 +67,17 @@ public class MainScreenController implements Initializable {
         emf = Persistence.createEntityManagerFactory("DEV_FXPU");
         em = emf.createEntityManager();
         //setBalanceLabel(); 
+    }
+    @FXML
+    private void goToAccount(ActionEvent event)
+    {
+        try {
+            fxmlController c = new fxmlController(user);
+            //c.goToRegistrationForm(event, "shopFXML.fxml", "Shop");
+            c.goToRegistrationForm(event,"AccountManagment.fxml", "Shop", 6);
+        } catch (IOException ex) {
+            Logger.getLogger(MainScreenController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     @FXML
     private void goToShop(ActionEvent event) throws IOException

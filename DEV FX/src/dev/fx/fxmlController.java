@@ -97,6 +97,10 @@ public class fxmlController extends DEVFX {
                 ServersController controller = loader.<ServersController>getController();
                 controller.setS(s);
             }
+            if (ControllerType == 6) {
+                AccountManagmentController controller = loader.<AccountManagmentController>getController();
+                controller.setUser(u);
+            }
         app_stage.setResizable(false);
         app_stage.show();
     }

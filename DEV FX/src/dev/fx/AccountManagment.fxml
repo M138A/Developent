@@ -1,11 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.fx.AccountManagmentController">
-    
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.fx.AccountManagmentController">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="174.0" layoutY="70.0" prefHeight="200.0" prefWidth="253.0">
+         <children>
+            <Label fx:id="usernameLabel" text="Label">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="firstNameLabel" text="Label">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lastNameLabel" text="Label">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="subscriptionLabel" text="Label">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="bannedLabel" text="Label">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text="Change password :">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="29.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Label layoutX="208.0" layoutY="14.0" text="Account managment">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <HBox layoutX="68.0" layoutY="301.0" prefHeight="63.0" prefWidth="497.0">
+         <children>
+            <PasswordField fx:id="oldPasswordField" promptText="Old password">
+               <HBox.margin>
+                  <Insets right="45.0" />
+               </HBox.margin>
+            </PasswordField>
+            <PasswordField fx:id="newPasswordField" promptText="New password">
+               <HBox.margin>
+                  <Insets right="45.0" />
+               </HBox.margin>
+            </PasswordField>
+            <Button mnemonicParsing="false" onAction="#changePassword" text="Change">
+               <HBox.margin>
+                  <Insets right="45.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <Label fx:id="errorLabel" layoutX="240.0" layoutY="364.0" />
+   </children>
 </AnchorPane>
