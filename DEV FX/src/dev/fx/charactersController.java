@@ -83,6 +83,7 @@ public class charactersController {
         
         Random rand = new Random();
         
+        if(!characterName.getText().isEmpty()){
         List results = em.createNamedQuery("Users.findByUserName")
                 .setParameter("userName", user.getUserName())
                 .getResultList();
@@ -105,11 +106,12 @@ public class charactersController {
                 
                 character.persist(character);
             }
+        }
             
             insertIntoOwns();
             
             
-        }
+       }
     }
 
     public void insertIntoOwns() {

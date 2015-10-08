@@ -44,15 +44,10 @@ public class ServerController implements Initializable {
     private String serverUsers;
     private String serverAdress;
     private String serverName;
+    private onClose close;
     
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-       
-   Runtime.getRuntime().addShutdownHook(new Thread()
-  {
+    private class onClose extends Thread{
+         
     @Override
     public void run()
     {
@@ -65,8 +60,24 @@ public class ServerController implements Initializable {
        
         ShopFXMLController f = new ShopFXMLController();
         f.mergeEntityObject(s);
+     }
     }
- });
+
+    
+    /**
+     * Initializes the controller class.
+     * @param url
+     * @param rb
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+       
+    close = new onClose();
+    Runtime.getRuntime().addShutdownHook(close);
+ 
+    
+   
+
     }    
 
     public void setSU(Servers s, Users u) {
@@ -87,6 +98,8 @@ public class ServerController implements Initializable {
     
     public void backToServers(ActionEvent event)
     {
+        
+        Runtime.getRuntime().removeShutdownHook(close);
         joinUsers = s.getConnectedUsers();
         joinUsers = joinUsers - 1;
         
