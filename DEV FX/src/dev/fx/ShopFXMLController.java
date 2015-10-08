@@ -45,6 +45,8 @@ public class ShopFXMLController implements Initializable {
     
     private int extraSlotsSinglePrice = 10;
     private int extraSlotsTotalPrice, newBalance;
+    
+    private int subscriptionFee;
 
     public void setUser(Users x) {
         user = x;
@@ -152,17 +154,23 @@ public class ShopFXMLController implements Initializable {
         int numberOfMonths = getSelectedRadioButton();
         Date today = getCurrentDate(); 
         
+        newBalance = user.getBalance() - subscriptionFee;
         
-        if(numberOfMonths == -1) {
-            renSubMistakeLabel.setText("Please Select 1 of the options");
-        } else if(user.getMonthsPayed() > 0){
-            renSubMistakeLabel.setText("Please wait till your subscription\nis over");
-        } else {
-            user.setLastPayment(today);
-            user.setMonthsPayed(numberOfMonths);
+        if(newBalance > 0) {
+            if(numberOfMonths == -1) {
+                renSubMistakeLabel.setText("Please Select 1 of the options");
+            } else if(user.getMonthsPayed() > 0){
+                renSubMistakeLabel.setText("Please wait till your subscription\nis over");
+            } else {
+                user.setLastPayment(today);
+                user.setMonthsPayed(numberOfMonths);
             
-            mergeEntityObject(user);
-            setMonthsLabel();
+                mergeEntityObject(user);
+                setMonthsLabel();
+                renSubMistakeLabel.setText("");
+            }
+        } else {
+            renSubMistakeLabel.setText("You don't have enough money");
         }
     }
     
@@ -187,15 +195,19 @@ public class ShopFXMLController implements Initializable {
     
     private int getSelectedRadioButton() {
         if (radioOneMonth.isSelected()) {
+            subscriptionFee = 15;
             return 1;
         }
         if (radioTwoMonth.isSelected()) {
+            subscriptionFee = 28;
             return 2;
         }
         if (radioThreeMonth.isSelected()) {
+            subscriptionFee = 40;
             return 3;
         }
         if (radioTwelveMonth.isSelected()) {
+            subscriptionFee = 100;
             return 12;
         }
         return -1;
