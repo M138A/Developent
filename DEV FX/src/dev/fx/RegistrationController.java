@@ -72,6 +72,7 @@ public class RegistrationController implements Initializable {
         newUser.setCharacterSlots(5);
         newUser.setBalance(0);
         newUser.setBanned(false);
+        newUser.setMonthsPayed(0);
         newUser.persist(newUser);
         goToMainScreen(newUser);
         

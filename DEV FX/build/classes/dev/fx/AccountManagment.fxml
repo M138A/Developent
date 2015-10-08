@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.fx.AccountManagmentController">
    <children>
-      <VBox alignment="TOP_CENTER" layoutX="174.0" layoutY="70.0" prefHeight="200.0" prefWidth="253.0">
+      <VBox alignment="CENTER_LEFT" layoutX="307.0" layoutY="70.0" prefHeight="150.0" prefWidth="233.0">
          <children>
             <Label fx:id="usernameLabel" text="Label">
                <VBox.margin>
@@ -52,14 +52,6 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="Change password :">
-               <VBox.margin>
-                  <Insets bottom="5.0" top="29.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
          </children>
       </VBox>
       <Label layoutX="208.0" layoutY="14.0" text="Account managment">
@@ -79,14 +71,66 @@
                   <Insets right="45.0" />
                </HBox.margin>
             </PasswordField>
-            <Button mnemonicParsing="false" onAction="#changePassword" text="Change">
+            <Button mnemonicParsing="false" onAction="#changePassword" prefHeight="39.0" prefWidth="150.0" text="Change">
                <HBox.margin>
                   <Insets right="45.0" />
                </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </Button>
          </children>
       </HBox>
       <Label fx:id="errorLabel" layoutX="240.0" layoutY="364.0" />
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#toMainMenu" text="Back" />
+      <Label layoutX="226.0" layoutY="254.0" text="Change password :">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER_RIGHT" layoutX="196.0" layoutY="70.0" prefHeight="150.0" prefWidth="94.0">
+         <children>
+            <Label text="Username:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="First name:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Last name">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Subscription:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Banned:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

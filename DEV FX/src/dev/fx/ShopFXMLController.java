@@ -8,6 +8,7 @@ package dev.fx;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -34,17 +35,16 @@ public class ShopFXMLController implements Initializable {
 
     private Users user;
     @FXML
-    private Label currentSlotsLabel, balanceLabel;
+    private Label currentSlotsLabel, currentMonthsLabel, balanceLabel, addMoneyMistakeLabel, addSlotsMistakeLabel, renSubMistakeLabel;
     @FXML
     private TextField characterAmountField, moneyAmountField;
     @FXML
     private RadioButton radioOneMonth, radioTwoMonth, radioThreeMonth, radioTwelveMonth;
     @FXML
     private ToggleGroup subGroup;
-
-    private void setCurrentSlots() {
-        currentSlotsLabel.setText(String.valueOf(user.getCharacterSlots()));
-    }
+    
+    private int extraSlotsSinglePrice = 10;
+    private int extraSlotsTotalPrice, newBalance;
 
     public void setUser(Users x) {
         user = x;
@@ -53,6 +53,7 @@ public class ShopFXMLController implements Initializable {
         }
         setCurrentSlots();
         setBalanceLabel();
+        setMonthsLabel();
     }
 
     @FXML
@@ -66,16 +67,6 @@ public class ShopFXMLController implements Initializable {
         }
     }
 
-    @FXML
-    public void buySlots(ActionEvent event) {
-        int numberOfSlots = Integer.valueOf(characterAmountField.getText());
-        numberOfSlots += user.getCharacterSlots();
-        user.setCharacterSlots(numberOfSlots);
-        mergeEntityObject(user);
-        setCurrentSlots();
-
-    }
-
     public void mergeEntityObject(Object ob) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("DEV_FXPU");
         EntityManager em = emf.createEntityManager();
@@ -85,39 +76,115 @@ public class ShopFXMLController implements Initializable {
     }
 
     @FXML
-    public void addMoney(ActionEvent event) {
-        int moneyAmount = Integer.valueOf(moneyAmountField.getText());
-        moneyAmount += user.getBalance();
-        user.setBalance(moneyAmount);
-        mergeEntityObject(user);
-        setBalanceLabel();
+    public void buySlots(ActionEvent event) {
+        if(characterAmountField.getText().equals("")) {
+            addSlotsMistakeLabel.setText("Please use at least 1 number");
+            
+        } else if(isInteger(characterAmountField, addSlotsMistakeLabel) && isPositive(characterAmountField, addSlotsMistakeLabel)) {
+            int numberOfSlots = Integer.valueOf(characterAmountField.getText());
+        
+            extraSlotsTotalPrice = extraSlotsSinglePrice * numberOfSlots;
+            newBalance = user.getBalance() - extraSlotsTotalPrice;
+        
+            if(newBalance < 0) {
+                addSlotsMistakeLabel.setText("You don't have enough money");
+            } else {
+                numberOfSlots += user.getCharacterSlots();
+                user.setBalance(newBalance);
+                user.setCharacterSlots(numberOfSlots);
+                mergeEntityObject(user);
+                setCurrentSlots();
+                setBalanceLabel();
+                addSlotsMistakeLabel.setText("");
+            } 
+        }
 
+    }
+    
+    @FXML
+    public void addMoney(ActionEvent event) {
+        if(moneyAmountField.getText().equals("")) {
+            addMoneyMistakeLabel.setText("Please use at least 1 number");
+            
+        } else if(isInteger(moneyAmountField, addMoneyMistakeLabel) && isPositive(moneyAmountField, addMoneyMistakeLabel)){
+            int moneyAmount = Integer.valueOf(moneyAmountField.getText());
+            moneyAmount += user.getBalance();
+            user.setBalance(moneyAmount);
+            mergeEntityObject(user);
+            setBalanceLabel();
+            addMoneyMistakeLabel.setText("");          
+        }
+    }
+    
+    private boolean isPositive(TextField shopAmount, Label showMistake) {
+        if(Integer.parseInt(shopAmount.getText()) > 0) {
+            return true;
+        } else {
+            showMistake.setText("Please use only positive numbers");
+            return false;
+        }
+    }
+    
+    private boolean isInteger(TextField shopAmount, Label showMistake) {
+        try{
+            Integer.parseInt(shopAmount.getText());
+            return true;
+        } catch(NumberFormatException ex){
+            showMistake.setText("Please use only numbers");
+            return false;
+        }
     }
 
     private void setBalanceLabel() {
         balanceLabel.setText("Balance : " + String.valueOf(user.getBalance()));
     }
 
+    private void setCurrentSlots() {
+        currentSlotsLabel.setText(String.valueOf(user.getCharacterSlots()));
+    }
+    
+    private void setMonthsLabel() {
+        currentMonthsLabel.setText(String.valueOf(user.getMonthsPayed()));
+    }
+    
     @FXML
     public void renSub(ActionEvent event) {
         int numberOfMonths = getSelectedRadioButton();
-        int[] today = getCurrentDate();
+        Date today = getCurrentDate(); 
         
         
+        if(numberOfMonths == -1) {
+            renSubMistakeLabel.setText("Please Select 1 of the options");
+        } else if(user.getMonthsPayed() > 0){
+            renSubMistakeLabel.setText("Please wait till your subscription\nis over");
+        } else {
+            user.setLastPayment(today);
+            user.setMonthsPayed(numberOfMonths);
+            
+            mergeEntityObject(user);
+            setMonthsLabel();
+        }
     }
-    private int[] getCurrentDate()
+    
+    private Date getCurrentDate()
     {
-        Calendar cal = Calendar.getInstance();
-        DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");        
-        Date today = new Date();        
-        formatter.format(today);
+        /*Calendar cal = Calendar.getInstance();
+        DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd"); */
+        
+        Date today = new Date();   
+        return today;
+        
+        /*formatter.format(today);
+        
         cal.setTime(today);
+        
         int[] date = new int[3];
         date[0] = formatter.getCalendar().get(Calendar.DAY_OF_MONTH);
         date[1] = formatter.getCalendar().get(Calendar.MONTH) + 1;
         date[2] = formatter.getCalendar().get(Calendar.YEAR);
-        return date;
+        return date;*/
     }
+    
     private int getSelectedRadioButton() {
         if (radioOneMonth.isSelected()) {
             return 1;

@@ -66,7 +66,7 @@ public class MainScreenController implements Initializable {
         try {
             fxmlController c = new fxmlController(user);
             //c.goToRegistrationForm(event, "shopFXML.fxml", "Shop");
-            c.goToRegistrationForm(event,"AccountManagment.fxml", "Shop", 6);
+            c.goToRegistrationForm(event,"AccountManagment.fxml", "Account Management", 6);
         } catch (IOException ex) {
             Logger.getLogger(MainScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -99,6 +99,16 @@ public class MainScreenController implements Initializable {
         try {
             fxmlController c = new fxmlController(user);
             c.goToRegistrationForm(event, "characters.fxml", "Characters",3);
+        } catch(IOException ex) {
+            Logger.getLogger(ShopFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @FXML
+    private void toLoginScreen(ActionEvent event) {
+        try {
+            fxmlController c = new fxmlController();
+            c.goToRegistrationForm(event, "mainfxml.fxml", "Login",0);
         } catch(IOException ex) {
             Logger.getLogger(ShopFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }

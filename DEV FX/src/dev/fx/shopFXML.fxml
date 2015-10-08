@@ -13,7 +13,7 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-    <Button layoutX="97.0" layoutY="187.0" mnemonicParsing="false" onAction="#buySlots" text="Buy slots">
+    <Button layoutX="97.0" layoutY="193.0" mnemonicParsing="false" onAction="#buySlots" text="Buy slots">
          <font>
             <Font size="14.0" />
          </font></Button>
@@ -21,7 +21,7 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-    <Button layoutX="431.0" layoutY="190.0" mnemonicParsing="false" onAction="#renSub" text="Renovate subscription">
+    <Button layoutX="422.0" layoutY="193.0" mnemonicParsing="false" onAction="#renSub" text="Renovate subscription">
          <font>
             <Font size="14.0" />
          </font></Button>
@@ -53,7 +53,47 @@
     <RadioButton fx:id="radioTwoMonth" layoutX="431.0" layoutY="118.0" mnemonicParsing="false" text="2 months" toggleGroup="$subGroup" />
     <RadioButton fx:id="radioThreeMonth" layoutX="431.0" layoutY="141.0" mnemonicParsing="false" text="3 months" toggleGroup="$subGroup" />
     <RadioButton fx:id="radioTwelveMonth" layoutX="431.0" layoutY="164.0" mnemonicParsing="false" text="1 year" toggleGroup="$subGroup" />
-    <Label fx:id="currentSlotsLabel" layoutX="70.0" layoutY="230.0" text="" />
-    <Label fx:id="monthsRemainingLabel" layoutX="440.0" layoutY="230.0" text="" />
+      <VBox alignment="CENTER" layoutX="55.0" layoutY="266.0">
+         <children>
+          <Label layoutX="56.0" layoutY="249.0" text="Amount of character slots left:">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="currentSlotsLabel" layoutX="129.0" layoutY="266.0" text="5">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+    <Label fx:id="renSubMistakeLabel" layoutX="419.0" layoutY="232.0">
+         <font>
+            <Font size="12.0" />
+         </font></Label>
+      <Label fx:id="addMoneyMistakeLabel" layoutX="260.0" layoutY="157.0">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label fx:id="addSlotsMistakeLabel" layoutX="77.0" layoutY="157.0">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER" layoutX="438.0" layoutY="266.0">
+         <children>
+            <Label layoutX="304.0" layoutY="275.0" text="Amount of months left:">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="currentMonthsLabel" layoutX="352.0" layoutY="292.0" text="5">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
   </children>
 </AnchorPane>

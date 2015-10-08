@@ -59,7 +59,7 @@
          <children>
             <Label text="Name:">
                <VBox.margin>
-                  <Insets bottom="5.0" />
+                  <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
                <font>
                   <Font size="14.0" />
@@ -67,7 +67,7 @@
             </Label>
             <Label text="Race:">
                <VBox.margin>
-                  <Insets bottom="5.0" />
+                  <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
                <font>
                   <Font size="14.0" />
@@ -75,7 +75,7 @@
             </Label>
             <Label text="Class:">
                <VBox.margin>
-                  <Insets bottom="20.0" />
+                  <Insets bottom="20.0" top="5.0" />
                </VBox.margin>
                <font>
                   <Font size="14.0" />
@@ -91,7 +91,7 @@
          <children>
             <Label fx:id="characterNameLabel" text="NameDummy">
                <VBox.margin>
-                  <Insets bottom="5.0" top="5.0" />
+                  <Insets bottom="5.0" top="10.0" />
                </VBox.margin>
                <font>
                   <Font size="14.0" />
@@ -99,7 +99,7 @@
             </Label>
             <Label fx:id="characterRaceLabel" text="RaceDummy">
                <VBox.margin>
-                  <Insets bottom="5.0" />
+                  <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
                <font>
                   <Font size="14.0" />
@@ -107,7 +107,7 @@
             </Label>
             <Label fx:id="characterClassLabel" text="ClassDummy">
                <VBox.margin>
-                  <Insets bottom="20.0" />
+                  <Insets bottom="20.0" top="5.0" />
                </VBox.margin>
                <font>
                   <Font size="14.0" />
@@ -127,5 +127,10 @@
          </padding>
       </VBox>
       <ChoiceBox fx:id="characterChoiceBox" layoutX="25.0" layoutY="25.0" prefHeight="31.0" prefWidth="130.0" />
+      <Button layoutX="25.0" layoutY="350.0" mnemonicParsing="false" onAction="#toLoginScreen" prefWidth="86.0" style="-fx-background-color: gray;" text="Log out">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
   </children>
 </AnchorPane>
