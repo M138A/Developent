@@ -176,24 +176,31 @@ public class ServersController implements Initializable {
         
         joinUsers = joinUsers + 1;
         
-        if(joinUsers <= joinMaxUsers){
-        s.setConnectedUsers(joinUsers);
-        ShopFXMLController f = new ShopFXMLController();
-        f.mergeEntityObject(s);
-        
-        
-        try{
-        fxmlController x = new fxmlController(s, u);
-        x.goToRegistrationForm(event, "server.fxml", joinName, 4);
-        }
-        catch(IOException e)
+        if(u.getMonthsPayed() >= 1)
         {
-            System.out.print(e);
-        }
-        }
-        else{
+            if(joinUsers <= joinMaxUsers) {
+            s.setConnectedUsers(joinUsers);
+            ShopFXMLController f = new ShopFXMLController();
+            f.mergeEntityObject(s);
+        
+        
+            try{
+            fxmlController x = new fxmlController(s, u);
+            x.goToRegistrationForm(event, "server.fxml", joinName, 4);
+            }
+            catch(IOException e)
+            {
+                System.out.print(e);
+            }
+            }
+            else{
             
-            serverError.setText("Server is Vol");
+            serverError.setText("Server is full");
+            }
+        }
+        else
+        {
+           serverError.setText("Your subscription has expired"); 
         }
     }
     
