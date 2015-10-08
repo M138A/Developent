@@ -48,6 +48,22 @@ public class ServerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        
+        Runtime.getRuntime().addShutdownHook(new Thread()
+  {
+    @Override
+    public void run()
+    {
+       
+        joinUsers = s.getConnectedUsers();
+        joinUsers = joinUsers - 1;
+        
+        
+        s.setConnectedUsers(joinUsers);
+       
+        ShopFXMLController f = new ShopFXMLController();
+        f.mergeEntityObject(s);
+    }
+ });
     }    
 
     public void setS(Servers s) {
@@ -106,7 +122,10 @@ public class ServerController implements Initializable {
             labelAdress.setText("Server adress : " + serverAdress);
             labelName.setText("Server Name : " + serverName);
         }
-    }
+    
 
+   
+ }
+    
    
 }

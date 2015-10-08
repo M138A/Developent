@@ -10,11 +10,8 @@
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-<<<<<<< HEAD
       <property name="javax.persistence.jdbc.password" value="Y6iknk20"/>
-=======
-      <property name="javax.persistence.jdbc.password" value="egqtr15z"/>
->>>>>>> origin/master
+
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
