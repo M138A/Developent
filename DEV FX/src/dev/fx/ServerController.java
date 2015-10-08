@@ -28,6 +28,7 @@ public class ServerController implements Initializable {
     private String hide = "Hide Info";
     private int joinUsers;
     private Servers s;
+    private Users u;
     
     @FXML 
     private Label labelAantal;
@@ -66,13 +67,19 @@ public class ServerController implements Initializable {
  });
     }    
 
-    public void setS(Servers s) {
+    public void setSU(Servers s, Users u) {
         this.s = s;
+        this.u = u;
        
         
-         if (s == null) {
+        if (s == null) {
             throw new NullPointerException("No server defined");
         }
+        if (u == null) {
+            throw new NullPointerException("No user defined");
+        }
+         
+        showServerInfo();
     }
    
     
@@ -89,43 +96,22 @@ public class ServerController implements Initializable {
         
         
        
-       fxmlController x = new fxmlController();
+       fxmlController x = new fxmlController(u);
        x.goToRegistrationForm(event, "servers.fxml", null, 5);
    
 }
-    public void showServerInfo(ActionEvent event)
+    public void showServerInfo()
     {
         serverUsers = s.getConnectedUsers().toString();
         serverAdress = s.getAdress();
         serverName = s.getName();
         
         System.out.print(serverUsers);
-       
         
-        
-        
-        if (showInfo.getText() == hide)
-        {
-            showInfo.setText("Info");
-            labelAantal.setVisible(false);
-            labelAdress.setVisible(false);
-            labelName.setVisible(false);
-        }
-        else 
-        {
-            showInfo.setText(hide);
-            
-             labelAantal.setVisible(true);
-            labelAdress.setVisible(true);
-            labelName.setVisible(true);
-            labelAantal.setText("Users op server : " + serverUsers);
-            labelAdress.setText("Server adress : " + serverAdress);
-            labelName.setText("Server Name : " + serverName);
-        }
-    
-
-   
- }
+        labelAantal.setText("Users op server : " + serverUsers);
+        labelAdress.setText("Server adress : " + serverAdress);
+        labelName.setText("Server Name : " + serverName);
+    }
     
    
 }

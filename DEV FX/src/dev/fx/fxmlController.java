@@ -26,8 +26,9 @@ public class fxmlController extends DEVFX {
         u = x;
     }
     
-    public fxmlController(Servers a){
+    public fxmlController(Servers a, Users b){
         s = a;
+        u = b;
     }
 
     public fxmlController() {
@@ -73,7 +74,7 @@ public class fxmlController extends DEVFX {
         Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();     
         app_stage.setTitle(Title);
         app_stage.setScene(scene2);
-        if (ControllerType == 1) {
+            if (ControllerType == 1) {
                 MainScreenController controller = loader.<MainScreenController>getController();
                 // init data
                 controller.setUser(u);
@@ -91,16 +92,21 @@ public class fxmlController extends DEVFX {
             }
             if (ControllerType == 4) {
                 ServerController controller = loader.<ServerController>getController();
-                controller.setS(s);
+                controller.setSU(s, u);
             }
             if (ControllerType == 5) {
                 ServersController controller = loader.<ServersController>getController();
-                controller.setS(s);
+                controller.setSU(s, u);
             }
             if (ControllerType == 6) {
                 AccountManagmentController controller = loader.<AccountManagmentController>getController();
                 controller.setUser(u);
             }
+            if(ControllerType == 7) {
+                ServersController controller = loader.<ServersController>getController();
+                controller.setU(u);
+            }
+            
         app_stage.setResizable(false);
         app_stage.show();
     }

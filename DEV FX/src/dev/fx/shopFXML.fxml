@@ -7,21 +7,42 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="dev.fx.ShopFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.fx.ShopFXMLController">
   <children>
-    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToMainScreen" text="Back" />
-    <Button layoutX="97.0" layoutY="187.0" mnemonicParsing="false" onAction="#buySlots" text="Buy slots" />
-    <Button layoutX="274.0" layoutY="193.0" mnemonicParsing="false" onAction="#addMoney" text="Add money" />
-    <Button layoutX="431.0" layoutY="190.0" mnemonicParsing="false" onAction="#renSub" text="Renovate subscription" />
+    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToMainScreen" text="Back">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+    <Button layoutX="97.0" layoutY="187.0" mnemonicParsing="false" onAction="#buySlots" text="Buy slots">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+    <Button layoutX="274.0" layoutY="193.0" mnemonicParsing="false" onAction="#addMoney" text="Add money">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+    <Button layoutX="431.0" layoutY="190.0" mnemonicParsing="false" onAction="#renSub" text="Renovate subscription">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
     <Label layoutX="282.0" layoutY="2.0" text="Shop">
       <font>
         <Font size="20.0" />
       </font>
     </Label>
     <Label fx:id="balanceLabel" layoutX="500.0" layoutY="19.0" text="" />
-    <Label layoutX="82.0" layoutY="66.0" text="Buy character slots" />
-    <Label layoutX="254.0" layoutY="66.0" text="Add money to account" />
-    <Label layoutX="431.0" layoutY="66.0" text="Renovate subscription" />
+    <Label layoutX="82.0" layoutY="66.0" text="Buy character slots">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+    <Label layoutX="254.0" layoutY="66.0" text="Add money to account">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+    <Label layoutX="431.0" layoutY="66.0" text="Renovate subscription">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
     <TextField fx:id="characterAmountField" layoutX="97.0" layoutY="115.0" prefWidth="71.0" promptText="amount" />
     <TextField fx:id="moneyAmountField" layoutX="279.0" layoutY="112.0" prefWidth="71.0" promptText="amount" />
     <RadioButton fx:id="radioOneMonth" layoutX="431.0" layoutY="96.0" mnemonicParsing="false" text="1 month">

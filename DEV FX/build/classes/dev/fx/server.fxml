@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.fx.ServerController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.fx.ServerController">
    <children>
-      <Button layoutX="70.0" layoutY="49.0" mnemonicParsing="false" onAction="#backToServers" text="Kies Server" />
-      <Button fx:id="showInfo" layoutX="354.0" layoutY="263.0" mnemonicParsing="false" onAction="#showServerInfo" text="Info" />
-      <Label fx:id="labelAantal" layoutX="360.0" layoutY="322.0" />
-      <Label fx:id="labelAdress" layoutX="360.0" layoutY="354.0" />
-      <Label fx:id="labelName" layoutX="360.0" layoutY="386.0" />
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backToServers" text="Back">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <VBox alignment="CENTER" layoutX="156.0" layoutY="110.0" prefHeight="181.0" prefWidth="288.0">
+         <children>
+            <Label fx:id="labelAantal" layoutX="360.0" layoutY="322.0" />
+            <Label fx:id="labelAdress" layoutX="360.0" layoutY="354.0" />
+            <Label fx:id="labelName" layoutX="360.0" layoutY="386.0" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

@@ -10,6 +10,8 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -69,6 +71,7 @@ public class ServersController implements Initializable {
     private String joinLocation;
     private int joinMaxUsers;
     private String joinName;
+    private Users u;
             
        @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -159,9 +162,15 @@ public class ServersController implements Initializable {
     }
     }
 
-    public void setS(Servers s) {
+    public void setSU(Servers s, Users user) {
         this.s = s;
+        this.u = user;
     }
+    
+    public void setU(Users user) {
+        this.u = user;
+    }
+    
     public void joinServer() 
     {
         
@@ -174,7 +183,7 @@ public class ServersController implements Initializable {
         
         
         try{
-        fxmlController x = new fxmlController(s);
+        fxmlController x = new fxmlController(s, u);
         x.goToRegistrationForm(event, "server.fxml", joinName, 4);
         }
         catch(IOException e)
@@ -190,8 +199,12 @@ public class ServersController implements Initializable {
     
     public void toMainMenu (ActionEvent event) throws IOException
     {
-        fxmlController x = new fxmlController();
-        x.goToRegistrationForm(event,"mainScreen.fxml","Main" , 1);
+        fxmlController c = new fxmlController(u);
+        try {
+            c.goToRegistrationForm(event, "mainScreen.fxml", "Main", 1);
+        } catch (IOException ex) {
+            Logger.getLogger(ShopFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
       
 }
