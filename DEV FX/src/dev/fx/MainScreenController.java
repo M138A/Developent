@@ -130,17 +130,22 @@ public class MainScreenController implements Initializable {
     
     
     public void addCharactersToMenu() {
-        List results = (List) user.getCharactersCollection();
+        List results =  em.createNativeQuery("SELECT o.name FROM owns as o, characters as c WHERE o.user_name = ? AND o.name = c.name ORDER BY c.level DESC")
+                .setParameter(1, user.getUserName())
+                .getResultList();
         
         if(!results.isEmpty()) {
-            Characters menuChar = (Characters) results.get(0);
-            String name = menuChar.getName();
+            //Characters menuChar = (Characters) results.get(0);
+            String name = (String) results.get(0);
+            //String name = menuChar.getName();
             characterChoiceBox.setValue(name);
         
             for(int i = 0; i < results.size(); i++) {
-                Characters menuChar2 = (Characters) results.get(i);
-                String result = menuChar2.getName();
-                characterChoiceBox.getItems().add(i, result);
+                System.out.println(results.get(i));
+                //Characters menuChar2 = (Characters) results.get(i);
+                String menuName = (String) results.get(i);
+                //String result = menuChar2.getName();
+                characterChoiceBox.getItems().add(i, menuName);
             }
         }
     }
