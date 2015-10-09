@@ -13,6 +13,6 @@
     <TextField fx:id="usernameField" layoutX="200.0" layoutY="133.0" prefWidth="200.0" promptText="Username" />
     <PasswordField fx:id="passwordField" layoutX="201.0" layoutY="183.0" prefWidth="200.0" promptText="Password" />
     <Button id="button" fx:id="regButton" layoutX="312.0" layoutY="243.0" onAction="#startRegistrationForm" text="Register" AnchorPane.leftAnchor="312.0" />
-      <Button fx:id="button1" layoutX="66.0" layoutY="185.0" onAction="#pompUsersVol" text="Pleur erin" />
+      <Button fx:id="button1" layoutX="66.0" layoutY="185.0" onAction="#pompVol" text="Pleur erin" />
   </children>
 </AnchorPane>

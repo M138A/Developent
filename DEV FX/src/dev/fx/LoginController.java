@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -51,6 +53,14 @@ public class LoginController implements Initializable {
     private String username = "";
     private String password = "";
     public static Users loginUser;
+    
+    Users u = new Users();
+    Servers s = new Servers();
+    Characters c = new Characters();
+    
+    ArrayList<Users> us = new ArrayList<Users>();
+    ArrayList<Servers> serversShit = new ArrayList<Servers>();
+    ArrayList<Characters> charactersShit = new ArrayList<Characters>();
     /*
     Login method
     */
@@ -128,15 +138,12 @@ public class LoginController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
     
-    public void pompCharactersVol(ActionEvent event)
+    public void pompCharactersVol(int i)
     {
-        for(int i = 0; i < 1011; i++){ 
-            Characters c = new Characters();
-            
-            
+        
             Random rand = new Random();
             int class1 = rand.nextInt(4) + 1;
             int race = rand.nextInt(3) + 1;
@@ -176,16 +183,13 @@ public class LoginController implements Initializable {
             c.setLevel(rand.nextInt(100) + 1);
             c.setName("Mark" + i);
             c.setRace(raceName);
+            charactersShit.add(c);
         
-            c.persist(c);
-        }
-        System.out.println("Yeaahhh 1000 rows");
     }
-    public void pompServersVol()
+    public void pompServersVol(int a)
     {
-        Servers s = new Servers();
         
-        for(int a = 1; a < 1002 ; a++){
+       
         
         Random rand = new Random();
         int class1 = rand.nextInt(20) + 1; 
@@ -196,23 +200,20 @@ public class LoginController implements Initializable {
         s.setLocation("EU");
         s.setMaxUsers(30);
         s.setName("Wesley" + a);
+        serversShit.add(s);
         
-        s.persist(s);
-        }
         
     }
     public void pompOwnsVol()
     {
         
     }
-    public void pompUsersVol()
+    public void pompUsersVol(int b)
     {
-        
-        Users u = new Users();
         
         Date today = new Date();
         
-        for (int b = 0; b < 1001; b++){
+        
             Random random = new Random();
             boolean a = random.nextBoolean();
             int c = random.nextInt(5) + 1;
@@ -229,14 +230,51 @@ public class LoginController implements Initializable {
             u.setMonthsPayed(c);
             u.setPassword("123");
             u.setUserName("Brian" + b);
+            us.add(u);
         
-            u.persist(u);
-        }
         
-        System.out.println("Yeaaah");
+        
     }
-    public void pompStoresVol()
+    public void pompVol()
     {
         
+        
+        for (int b = 1; b < 1001; b++){
+            pompCharactersVol(b);
+            pompServersVol(b);
+            pompUsersVol(b);
+
+            u.persist(u);
+            c.persist(c);
+            s.persist(s);
+            
+        }
+        System.out.println("Yeaaah");
+        
+        charactersShit.clear();
+        serversShit.clear();
+        us.clear();
+        
+        addCollections();
+    }
+
+    public void addCollections() {
+        ShopFXMLController shop = new ShopFXMLController();
+        
+        for(int b = 1; b < 1001; b++){
+            pompCharactersVol(b);
+            pompServersVol(b);
+            pompUsersVol(b);
+        
+            u.setCharactersCollection(charactersShit);
+            u.setServersCollection(serversShit);
+            s.setUsersCollection(us);
+            c.setUsersCollection(us);
+        
+        
+            shop.mergeEntityObject(u);
+            shop.mergeEntityObject(s);
+            shop.mergeEntityObject(c);
+        }
     }
 }
