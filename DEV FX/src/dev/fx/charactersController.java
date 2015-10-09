@@ -7,6 +7,7 @@
 package dev.fx;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -33,8 +34,10 @@ public class charactersController {
     RadioButton assassinClass, mageClass, warriorClass, rangerClass, 
                 elfRace, grasshopperRace, humanRace;
     
-    String classSelected;
+    String selectedClass;
+    boolean classSelected = false;
     String race;
+    boolean raceSelected = false;
     Characters character = new Characters();
     
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("DEV_FXPU");
@@ -42,6 +45,9 @@ public class charactersController {
     
     MainScreenController msc = new MainScreenController();
     //String userName = msc.username;
+    ArrayList<Users> usersCollection = new ArrayList<>();
+    ArrayList<Characters> charactersCollection = new ArrayList<>();
+    
     private Users user;
     public void setUser(Users u)
     {
@@ -51,28 +57,35 @@ public class charactersController {
     
     public void selectedClass() {
         if(assassinClass.isSelected()) {
-            classSelected = "Assassin";
+            selectedClass = "Assassin";
+            classSelected = true;
         }
         if(mageClass.isSelected()) {
-            classSelected = "Mage";
+            selectedClass = "Mage";
+            classSelected = true;
         }
         if(rangerClass.isSelected()) {
-            classSelected = "Ranger";
+            selectedClass = "Ranger";
+            classSelected = true;
         }
         if(warriorClass.isSelected()) {
-            classSelected = "Warrior";
+            selectedClass = "Warrior";
+            classSelected = true;
         }
     }
     
     public void selectedRace() {
         if(elfRace.isSelected()) {
             race = "Elf";
+            raceSelected = true;
         }
         if(grasshopperRace.isSelected()) {
             race = "Grasshopper";
+            raceSelected = true;
         }
         if(humanRace.isSelected()) {
             race = "Human";
+            raceSelected = true;
         }
     }
     
@@ -83,19 +96,15 @@ public class charactersController {
         
         Random rand = new Random();
         
-        if(!characterName.getText().isEmpty()){
-        List results = em.createNamedQuery("Users.findByUserName")
-                .setParameter("userName", user.getUserName())
-                .getResultList();
-        
-        if(results.size() > 0){
-            Users user = (Users) results.get(0);
+        if(!characterName.getText().trim().isEmpty()){
             
             if(user.getCharacterSlots() > 0) {
                 character.setName(characterName.getText());
-                character.setClass1(classSelected);
+                character.setClass1(selectedClass);
                 character.setRace(race);
                 character.setLevel(rand.nextInt(100) + 1);
+                charactersCollection.add(character);
+                usersCollection.add(user);
                 
                 int amountOfSlots = user.getCharacterSlots() - 1;
                 user.setCharacterSlots(amountOfSlots);
@@ -105,29 +114,20 @@ public class charactersController {
                 System.out.println("Sure mate");
                 
                 character.persist(character);
+                insertIntoOwns();
             }
         }
-            
-            insertIntoOwns();
-            
-            
-       }
     }
 
     public void insertIntoOwns() {
-        em.getTransaction().begin();
-        try {
-            em.createNativeQuery("INSERT INTO owns(name, user_name) VALUES (?,?)")
-                    .setParameter(1, characterName.getText())
-                    .setParameter(2, user.getUserName())
-                    .executeUpdate();
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
+        ShopFXMLController merger = new ShopFXMLController();
+        
+        user.setCharactersCollection(charactersCollection);
+        character.setUsersCollection(usersCollection);
+        
+        merger.mergeEntityObject(user);
+        merger.mergeEntityObject(character);
+        
     }
     
     public void toMainMenu(ActionEvent event){

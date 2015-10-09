@@ -120,6 +120,33 @@ public class ShopFXMLController implements Initializable {
         }
     }
     
+    @FXML
+    public void renSub(ActionEvent event) {
+        int numberOfMonths = getSelectedRadioButton();
+        Date today = getCurrentDate(); 
+        
+        newBalance = user.getBalance() - subscriptionFee;
+        
+        if(newBalance >= 0) {
+            if(numberOfMonths == -1) {
+                renSubMistakeLabel.setText("Please Select 1 of the options");
+            } else if(user.getMonthsPayed() > 0){
+                renSubMistakeLabel.setText("Please wait till your subscription\nis over");
+            } else {
+                user.setBalance(newBalance);
+                user.setLastPayment(today);
+                user.setMonthsPayed(numberOfMonths);
+            
+                mergeEntityObject(user);
+                setMonthsLabel();
+                setBalanceLabel();
+                renSubMistakeLabel.setText("");
+            }
+        } else {
+            renSubMistakeLabel.setText("You don't have enough money");
+        }
+    }
+    
     private boolean isPositive(TextField shopAmount, Label showMistake) {
         if(Integer.parseInt(shopAmount.getText()) > 0) {
             return true;
@@ -149,31 +176,6 @@ public class ShopFXMLController implements Initializable {
     
     private void setMonthsLabel() {
         currentMonthsLabel.setText(String.valueOf(user.getMonthsPayed()));
-    }
-    
-    @FXML
-    public void renSub(ActionEvent event) {
-        int numberOfMonths = getSelectedRadioButton();
-        Date today = getCurrentDate(); 
-        
-        newBalance = user.getBalance() - subscriptionFee;
-        
-        if(newBalance > 0) {
-            if(numberOfMonths == -1) {
-                renSubMistakeLabel.setText("Please Select 1 of the options");
-            } else if(user.getMonthsPayed() > 0){
-                renSubMistakeLabel.setText("Please wait till your subscription\nis over");
-            } else {
-                user.setLastPayment(today);
-                user.setMonthsPayed(numberOfMonths);
-            
-                mergeEntityObject(user);
-                setMonthsLabel();
-                renSubMistakeLabel.setText("");
-            }
-        } else {
-            renSubMistakeLabel.setText("You don't have enough money");
-        }
     }
     
     private Date getCurrentDate()
