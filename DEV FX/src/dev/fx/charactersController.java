@@ -115,11 +115,13 @@ public class charactersController {
                 
                 character.persist(character);
                 insertIntoOwns();
+                
+                emptyFields();
             }
         }
     }
 
-    public void insertIntoOwns() {
+    private void insertIntoOwns() {
         ShopFXMLController merger = new ShopFXMLController();
         
         user.setCharactersCollection(charactersCollection);
@@ -128,6 +130,22 @@ public class charactersController {
         merger.mergeEntityObject(user);
         merger.mergeEntityObject(character);
         
+    }
+    
+    private void emptyFields() {
+        classSelected = false;
+        raceSelected = false;
+        
+        characterName.setText("");
+        
+        assassinClass.setSelected(false);
+        mageClass.setSelected(false);
+        rangerClass.setSelected(false);
+        warriorClass.setSelected(false);
+        
+        elfRace.setSelected(false);
+        grasshopperRace.setSelected(false);
+        humanRace.setSelected(false);
     }
     
     public void toMainMenu(ActionEvent event){

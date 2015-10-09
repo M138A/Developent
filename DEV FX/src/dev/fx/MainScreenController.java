@@ -158,7 +158,11 @@ public class MainScreenController implements Initializable {
         characterNameLabel.setText(characterName);
         characterClassLabel.setText(selectedClass);
         characterRaceLabel.setText(race);
-        characterLevelLabel.setText(Integer.toString(level));
+        if(level == 0) {
+            characterLevelLabel.setText("");
+        } else {
+            characterLevelLabel.setText(Integer.toString(level));
+        }
     }
     
     public void onSelectedCharacterChanged() {

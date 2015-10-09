@@ -43,7 +43,8 @@ public class RegistrationController implements Initializable {
     @FXML
     private void checkInput(ActionEvent event)
     {
-        if(name.getText().isEmpty() || surname.getText().isEmpty() || username.getText().isEmpty() || password.getText().isEmpty())
+        if(name.getText().trim().isEmpty() || surname.getText().trim().isEmpty() || 
+                username.getText().trim().isEmpty() || password.getText().trim().isEmpty())
         {
             messageLabel.setText("Fill in all fields!");
         } 
