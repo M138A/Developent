@@ -77,7 +77,7 @@ public class randomDataClass {
         
             
         server.setAdress("" + a);
-        server.setConnectedUsers(0);
+        server.setConnectedUsers(1);
         server.setLocation("EU");
         server.setMaxUsers(30);
         server.setName("Wesley" + a);

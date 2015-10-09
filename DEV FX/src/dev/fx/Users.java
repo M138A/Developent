@@ -195,6 +195,7 @@ public class Users implements Serializable {
         System.out.println("Hello");
         return "dev.fx.Users[ userName=" + userName + " ]";
     }
+    
     public void mergeEntityObject(Object ob) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("DEV_FXPU");
         EntityManager em = emf.createEntityManager();
@@ -202,6 +203,7 @@ public class Users implements Serializable {
         em.merge(ob);
         em.getTransaction().commit();
     }
+    
     public void persist(Object object) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("DEV_FXPU");
         EntityManager em = emf.createEntityManager();

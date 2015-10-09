@@ -59,21 +59,27 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <HBox layoutX="68.0" layoutY="301.0" prefHeight="63.0" prefWidth="497.0">
+      <HBox alignment="CENTER" layoutX="274.0" layoutY="290.0" prefHeight="63.0" prefWidth="312.0">
          <children>
             <PasswordField fx:id="oldPasswordField" promptText="Old password">
                <HBox.margin>
-                  <Insets right="45.0" />
+                  <Insets right="10.0" />
                </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </PasswordField>
             <PasswordField fx:id="newPasswordField" promptText="New password">
                <HBox.margin>
-                  <Insets right="45.0" />
+                  <Insets right="10.0" />
                </HBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </PasswordField>
             <Button mnemonicParsing="false" onAction="#changePassword" prefHeight="39.0" prefWidth="150.0" text="Change">
                <HBox.margin>
-                  <Insets right="45.0" />
+                  <Insets />
                </HBox.margin>
                <font>
                   <Font size="14.0" />
@@ -81,11 +87,14 @@
             </Button>
          </children>
       </HBox>
-      <Label fx:id="errorLabel" layoutX="240.0" layoutY="364.0" />
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#toMainMenu" text="Back" />
-      <Label layoutX="226.0" layoutY="254.0" text="Change password :">
+      <Label fx:id="changePasswordInfoLabel" layoutX="366.0" layoutY="343.0">
          <font>
-            <Font size="18.0" />
+            <Font size="14.0" />
+         </font></Label>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#toMainMenu" text="Back" />
+      <Label layoutX="357.0" layoutY="265.0" text="Change password :">
+         <font>
+            <Font size="16.0" />
          </font>
       </Label>
       <VBox alignment="CENTER_RIGHT" layoutX="196.0" layoutY="70.0" prefHeight="150.0" prefWidth="94.0">
@@ -132,5 +141,32 @@
             </Label>
          </children>
       </VBox>
+      <Label layoutX="96.0" layoutY="265.0" text="IBAN :">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="14.0" layoutY="290.0" prefHeight="63.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#changeIBAN" text="Change">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+            <TextField fx:id="ibanTextField" prefHeight="30.0" prefWidth="122.0" promptText="IBAN">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <Label fx:id="ibanInfoLabel" layoutX="55.0" layoutY="343.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

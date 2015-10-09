@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -29,9 +30,11 @@ public class AccountManagmentController implements Initializable {
         setLabels();
     }
     @FXML
-    Label usernameLabel, firstNameLabel, lastNameLabel, subscriptionLabel, bannedLabel, errorLabel;
+    Label usernameLabel, firstNameLabel, lastNameLabel, subscriptionLabel, bannedLabel, changePasswordInfoLabel, ibanInfoLabel;
     @FXML
     PasswordField oldPasswordField, newPasswordField;
+    @FXML
+    TextField ibanTextField;
     
     @FXML
     public void changePassword(ActionEvent event)
@@ -40,13 +43,24 @@ public class AccountManagmentController implements Initializable {
         {
             user.setPassword(newPasswordField.getText());
             user.mergeEntityObject(user);
-            errorLabel.setText("Password changed");
+            changePasswordInfoLabel.setText("Password changed");
         }
         else
         {
-            errorLabel.setText("Wrong old password");
+            changePasswordInfoLabel.setText("Wrong old password");
         }
     }
+    
+    public void changeIBAN() {
+        if(ibanTextField.getText().trim().isEmpty()) {
+            ibanInfoLabel.setText("Use at least 1 letter");
+        } else {
+            user.setIban(ibanTextField.getText().trim());
+            user.mergeEntityObject(user);
+            ibanInfoLabel.setText("Iban changed");
+        }
+    }
+    
     private void setLabels()
     {
         usernameLabel.setText(user.getUserName());
@@ -55,15 +69,6 @@ public class AccountManagmentController implements Initializable {
         subscriptionLabel.setText("Your account is " + user.getMonthsPayed() + " months valid");
         bannedLabel.setText(user.getBanned().toString());
     }
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        
-        
-    }    
     
     public void toMainMenu(ActionEvent event) {
         fxmlController c = new fxmlController(user);   
@@ -74,4 +79,13 @@ public class AccountManagmentController implements Initializable {
         }
     }
     
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        
+        
+    }    
 }

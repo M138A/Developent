@@ -110,7 +110,10 @@ public class ShopFXMLController implements Initializable {
         if(moneyAmountField.getText().equals("")) {
             addMoneyMistakeLabel.setText("Please use at least 1 number");
             
-        } else if(isInteger(moneyAmountField, addMoneyMistakeLabel) && isPositive(moneyAmountField, addMoneyMistakeLabel)){
+        } else if(isInteger(moneyAmountField, addMoneyMistakeLabel) &&
+                isPositive(moneyAmountField, addMoneyMistakeLabel) &&
+                ibanEntered(addMoneyMistakeLabel)){
+            
             int moneyAmount = Integer.valueOf(moneyAmountField.getText());
             moneyAmount += user.getBalance();
             user.setBalance(moneyAmount);
@@ -163,6 +166,17 @@ public class ShopFXMLController implements Initializable {
         } catch(NumberFormatException ex){
             showMistake.setText("Please use only numbers");
             return false;
+        }
+    }
+    
+    private boolean ibanEntered(Label showMistake) {
+        String iban = user.getIban();
+        
+        if(iban == null) {
+            showMistake.setText("Please fill in your IBAN first");
+            return false;
+        } else {
+            return true;
         }
     }
 
