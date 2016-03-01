@@ -104,18 +104,12 @@ public class charactersController {
                 character.setRace(race);
                 character.setLevel(rand.nextInt(100) + 1);
                 charactersCollection.add(character);
-                usersCollection.add(user);
-                
+                usersCollection.add(user);                
                 int amountOfSlots = user.getCharacterSlots() - 1;
-                user.setCharacterSlots(amountOfSlots);
-                
-                em.merge(user);
-                
-                System.out.println("Sure mate");
-                
+                user.setCharacterSlots(amountOfSlots);                
+                em.merge(user);               
                 character.persist(character);
                 insertIntoOwns();
-                
                 emptyFields();
             }
         }

@@ -8,6 +8,7 @@ package dev.fx;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -20,6 +21,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Persistence;
 import javax.persistence.Table;
@@ -40,6 +42,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Characters.findByLevel", query = "SELECT c FROM Characters c WHERE c.level = :level"),
     @NamedQuery(name = "Characters.findByRace", query = "SELECT c FROM Characters c WHERE c.race = :race")})
 public class Characters implements Serializable {
+    @Column(name = "id")
+    private Integer id;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "characters")
+    private Collection<Owns> ownsCollection;
     @JoinTable(name = "owns", joinColumns = {
         @JoinColumn(name = "name", referencedColumnName = "name")}, inverseJoinColumns = {
         @JoinColumn(name = "user_name", referencedColumnName = "user_name")})
@@ -143,6 +149,23 @@ public class Characters implements Serializable {
 
     public void setUsersCollection(Collection<Users> usersCollection) {
         this.usersCollection = usersCollection;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @XmlTransient
+    public Collection<Owns> getOwnsCollection() {
+        return ownsCollection;
+    }
+
+    public void setOwnsCollection(Collection<Owns> ownsCollection) {
+        this.ownsCollection = ownsCollection;
     }
     
     
